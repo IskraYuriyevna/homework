@@ -4,17 +4,17 @@ section .text
 global CMAIN
 CMAIN:
     xor ecx,ecx
-    jmp .loop
-        
+    mov edx,-1
+    shl edx,5
+    not edx
+    jmp .loop  
+    
 .loop:
     GET_UDEC 4,eax
     cmp eax,0
     je .end
-    mov ebx,eax
-    shr eax,5
-    shl eax,5
-    sub ebx,eax
-    add ecx,ebx
+    and eax,edx
+    add ecx,eax   
     jmp .loop
 
  .end: 

@@ -3,30 +3,35 @@
 section .text
 global CMAIN
 countbinx:    
+    push ebp
+    mov ebp,esp        
+    push ecx
     push ebx
+    mov eax,dword[ebp+8]    
     xor ecx,ecx
     jmp .loop
     
 .loop:    
-    mov ebx,edi
+    mov ebx,eax
     sub ebx,1
-    cmp edi,0
+    cmp eax,0
     je .ed
-    and edi,ebx
+    and eax,ebx
     inc ecx
     jmp .loop
     
 .ed:
     mov eax,ecx
     pop ebx
+    pop ecx
+    pop ebp
     ret
 
 CMAIN:
-    mov ebp, esp; for correct debugging
-    GET_UDEC 4,edi
-    push ecx
+    GET_UDEC 4,eax
+    push eax
     call countbinx
-    pop ecx
+    add esp,4
     PRINT_UDEC 4,eax
     xor eax,eax
     ret

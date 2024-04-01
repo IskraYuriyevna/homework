@@ -3,19 +3,18 @@ section .text
 global main
 main:
     ;write your code here
-    mov ebx,0
-    GET_UDEC 4,eax
-    cmp eax,ebx
+    GET_DEC 4,eax
+    mov ebx,eax
     ja .loop
 
 .loop:
     mov ebx,eax
-    GET_UDEC 4,eax
+    GET_DEC 4,eax
     cmp eax,0
     je .ed
     cmp eax,ebx
-    jae .loop
-    jb .na  
+    jg .loop
+    jle .na  
     
 .na:
     PRINT_UDEC 4,0
