@@ -1,11 +1,15 @@
 #include<stdio.h>
 
 int main() {
-    int n,count;
+    int n;unsigned long long count=1;
     scanf("%d",&n);
-    if(n == 1){count = 1;}
-    if(n == 2){count = 2;}
-    else {count = n * (n - 1) * (n - 2);}
-    printf("%d",count);
+    if(n < 2){count = 1;}
+    else if(n == 2){count = 2;}
+    else {
+        for(int i=n-2;i<=n;i++){
+            count *=i;
+        }
+    }
+    printf("%llu",count);
     return 0;
 }

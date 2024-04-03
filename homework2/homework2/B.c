@@ -1,10 +1,9 @@
-#include <stdio.h>
-
-int main(){
+int main()
+{
     int a,b;
-    scanf("%d\n%d",&a,&b);
-
-    printf("%d",a+b);
-
-    return 0;
+    if(scanf("%d%d",&a,&b)==2)
+     {   
+         printf("%lld\n",(long long)a+b);
+         return 0;}
+    return -1;
 }

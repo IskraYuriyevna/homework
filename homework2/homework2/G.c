@@ -1,20 +1,18 @@
 #include <stdio.h>
 
-int main() {
-    long i,j,k,l,m,n=0;
-    scanf("%ld %ld",&m,&n);
-    if (m>=0) {
-        k = m/n;
-        l = m%n;
-        for(i=1;i<n;i++){printf("%ld ",k);}
-        j = k+l;
-        printf("%ld",j);
+int main(){
+    int i,j,k,l,m=0,n;
+    if(scanf("%d%d",&i,&j)==2){
+        k=i/j;
+        l=k+1;
+        while(m*k+(j-m)*l != i){m++;}
+        for(n=0;n<m;n++){
+            printf("%d ",k);
         }
-    else {
-        k = m/(n-1);
-        l = m%(n-1);
-        for(i=1;i<n;i++){printf("%ld ",k);}
-        j = k-l;
-        printf("%ld",j);
+        for(n=m;n<j;n++){
+            printf("%d ",l);
+        }
     }
-} 
+
+    return 0;
+}
