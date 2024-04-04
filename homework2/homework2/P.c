@@ -1,15 +1,20 @@
 #include <stdio.h>
 
 int main(){
-    char ca[26]={0};char c;
+    int ca[26]={0},odr[26]={0},o=0,i,j;char c;
+    
     while((c = getchar())!='.'){
-        ca[c-97]++;
+        o++;
+        ca[c-'a']++;
+        odr[c-'a'] = o;
+        
     }
-    for(int i=0;i<26;i++){
-        if(ca[i]==0){
-            continue;
-        }else{
-            printf("%c%d",i+97,ca[i]);
+    for(i=1;i<=o;i++){
+
+        for(j=0;j<26;j++){
+            if(odr[j]==i){
+                printf("%c%d",j+'a',ca[j]);
+            }
         }
     }
 
