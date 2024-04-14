@@ -1,23 +1,23 @@
 %include 'io.inc'
 
 section .bss
-N equ 10
-a resd N
+N equ 10; Assign the value of variable N to 10
+a resd N; Create an array of size N
 
 section .text
 global CMAIN
 
 CMAIN:
-    xor ebx,ebx
-    xor edx,edx    
-    mov ecx,N
+    xor ebx,ebx; "i"
+    xor edx,edx
+    mov ecx,N; Loop cycles
     
 .input:
-    GET_DEC 4,[a+4*ebx]
+    GET_DEC 4,[a+4*ebx]; a[i]
     inc ebx
     loop .input
     xor ebx,ebx
-    mov eax,dword[a]
+    mov eax,dword[a]; a[0]
     
 .Fmax:
     cmp ebx,N
