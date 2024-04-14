@@ -29,9 +29,9 @@ CMAIN:
     
 .inloop:
     cdq
-    idiv ecx
+    div ecx
     cdq
-    idiv ecx
+    div ecx
     cmp edx,0
     je .rt
     jne .endinloop
@@ -57,7 +57,7 @@ CMAIN:
     PRINT_DEC 4,[b+4*ebx]
     PRINT_STRING " "
     
-.skip
+.skip:
     inc ebx
     jmp .out
     
