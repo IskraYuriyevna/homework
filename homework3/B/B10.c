@@ -1,16 +1,57 @@
-#include<stdio.h>
-#include<stdlib.h>
+# include <stdio.h>
 
 int main(){
-    long i=0,sum,an;
-    while((an=getchar())!='\n'){
-        if (an!=' '){
-            if (i==0){sum=an-'0';i++;}
-            else if(((i%2)==0)){sum=sum-(an-'0');i++;}
-            else if(((i%2)==1)){sum=sum+(an-'0');i++;}
-        }
-    }
-    printf("%d",sum);
+    char c;int cnt=0,zsf=0,bf=0,sf=0;
+    // zsf for "Zero Start Flag",bf for "Bad Flag",sf for "Symbol Flag"
 
+    while((c=getchar())!='\n'){
+        if((sf==1)&&(c=='-')){
+            bf = 1;
+            break;
+
+        }else if(zsf==1){
+            bf = 1;
+            break;
+
+        }else if ((c=='-')&&(cnt==0)){
+            sf = 1;
+            continue;
+
+        }else if((c=='0')&&(cnt==0)){
+            zsf = 1;
+            continue;
+            
+        }else if ((c>='0')&&(c<='9')){
+            cnt++;
+            continue;
+            
+        }else{
+            bf = 1;
+            break;
+            
+        }
+
+    }
+    
+    if (bf==1){
+        printf("NO");
+
+    }else if ((zsf==1)&&(sf==1)){
+        printf("NO");
+
+    }else if ((zsf==1)&&(cnt==0)){
+        printf("YES");
+
+    }else if (cnt==0){
+        printf("NO");
+
+    }else{
+        printf("YES");
+
+    }
+   
     return 0;
-}
+}   
+
+        
+

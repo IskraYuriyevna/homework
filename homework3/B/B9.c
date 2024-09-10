@@ -1,15 +1,38 @@
-#include<stdio.h>
-#include<ctype.h>
+# include <stdio.h>
 
 int main(){
-    int a,cntl=0,cntu=0;
+    int cnt1=0,cnt2=0,bf=0;char c;
 
-    while ((a=getchar())!='\n'){
-        if(islower(a)){cntl++;}
-        else if(isupper(a)){cntu++;}
+    while((c=getchar())!='\n'){
+        if(c=='='){
+            cnt1++;
+            continue;
+        }else{
+            bf = 1;
+            break;
+        }
     }
 
-    printf("%d %d",cntl,cntu);
+    while((c=getchar())!='\n'){
+        if(c=='='){
+            cnt2++;
+            continue;
+        }else{
+            bf = 1;
+            break;
+        }
+    }
+
+
+    if (bf == 1){
+        printf("Incorrect");
+    }else if(cnt1>cnt2){
+        printf("First");
+    }else if(cnt2>cnt1){
+        printf("Second");
+    }else{
+        printf("Equal");
+    }
 
     return 0;
 }
