@@ -1,23 +1,21 @@
 #include<stdio.h>
-
-void rwxnum(short num,char* arr){
-    unsigned short mask = 1<<8*(sizeof(short))-1;
-    for (int i=0;i<=16;i++){
-        if (num&mask){;}
-        else{arr[i]='-';}
-        mask>>=1;
+void print_bit(short sh)
+{
+    unsigned short mask= 1<<15;
+    for(; mask !=0;mask = mask>>1)
+    {
+        if((mask & sh) > 0) {
+            printf("1");
+        } else {
+            printf("0");
+        }
     }
+    printf("\n");
 }
-
 int main(){
-    short n,i;
-    char rwx[16]="rwxrwxrwxrwxrwxr";
-    scanf("%ho",&n);
-    rwxnum(n,rwx);
-    for (i=0;i<=15;i++){
-        printf("%c",rwx[i]);
+    short sh;
+    if(scanf("%hd",&sh) == 1){
+        print_bit(sh);
     }
-    
-
     return 0;
 }

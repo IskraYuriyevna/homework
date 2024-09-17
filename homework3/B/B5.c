@@ -5,6 +5,7 @@ int main(){
     while(1){
         c=getchar();
         if (((c=='\n')||(c==EOF))&&(count==0)){
+            // 如果检测到
             printf("%d",-1);
             //printf("HR1 ");
             break;
@@ -40,6 +41,7 @@ int main(){
         }
 
     }
+
 
     return 0;
 }
