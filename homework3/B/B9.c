@@ -1,7 +1,7 @@
 # include <stdio.h>
 
 int main(){
-    int cnt1=0,cnt2=0,bf=0;char c;
+    int cnt1=0,cnt2=0,bf=0,c;
 
     while((c=getchar())!='\n'){
         if(c=='='){

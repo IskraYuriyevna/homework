@@ -1,7 +1,7 @@
 # include <stdio.h>
 
 int main(){
-    char c;int cnt=0,zsf=0,bf=0,sf=0;
+    int cnt=0,zsf=0,bf=0,sf=0,c;
     // zsf for "Zero Start Flag",bf for "Bad Flag",sf for "Symbol Flag"
 
     while((c=getchar())!='\n'){

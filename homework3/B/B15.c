@@ -1,17 +1,17 @@
-#include<stdio.h>
+#include <stdio.h>
+
 int main(){
-    int sum=0,n=0,num;
-    while(1){
-        scanf("%d",&num);
-        if (num%1000==0){break;}
-        sum = 0;
-        while (num>=1){
-            n=num%10;
-            if (n!=5){sum = sum + n;}
-            num=num/10;
-        }
-        printf("%d ",sum);
-    } 
+    int yy,mm,dd;unsigned int maskd = 65535<<5,maskm = 65535<<9;unsigned short date;
+    scanf("%hu",&date);
+    yy = (date&maskm)>>9;
+    mm = ((date&maskd)-(date&maskm))>>5;
+    dd = date - (date&maskd);
     
-    return 0;
+    if (yy>=50){
+        yy+=1900;
+    }else{
+        yy+=2000;
+    }
+
+    printf("%d %d %d",yy,mm,dd);
 }

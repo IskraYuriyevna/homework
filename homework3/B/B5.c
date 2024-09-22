@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-    int count=0,sum=0;char c;
+    int count=0,sum=0,c;
     while(1){
         c=getchar();
         if (((c=='\n')||(c==EOF))&&(count==0)){

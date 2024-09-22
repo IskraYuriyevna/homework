@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-    long num,cnt=0,sum=0;char c;
+    long num,cnt=0,sum=0,c;
 
     while(((c=getchar())!='\n')&&(c!=EOF)){
 
