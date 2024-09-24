@@ -1,18 +1,12 @@
-#include <stdio.h>
-
+#include<stdio.h>
 int main(){
-    float m,n,o,p;int i,j;
-    scanf("%f %f",&m,&n);
+	int n=0,nsq=0,ncb=0;
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++){
+		nsq = i*i;
+		ncb = i*i*i;
+		printf("%3d %4d %6d\n",i,nsq,ncb);
+	}
 
-    for(j=n-1;j>=0;j--){
-        for (i=0;i<m;i++){
-            o=i/(m-1);
-            p=j/(n-1);
-            printf("(%-4.3f, ",o);
-            printf("%-4.3f) ",p);
-        }
-        printf("\n");
-    }
-
-    return 0;
+	return 0;
 }

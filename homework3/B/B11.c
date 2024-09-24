@@ -1,20 +1,34 @@
-#include<stdio.h>
-
-void print_bin(short num){
-    unsigned short mask = 1 << sizeof(short)*8-1;
-    for ( ;mask; mask>>=1){
-        if (mask&num)
-            printf("1");
-        else
-            printf("0");
-    }
-}
-
+#include <stdio.h>
 
 int main(){
-    short n;
-    scanf("%hd",&n);
-    print_bin(n);
+    long num,cnt=0,sum=0,c;
+
+    while(((c=getchar())!='\n')&&(c!=EOF)){
+
+        if (c==' '){
+            continue;
+        }else{
+            ungetc(c,stdin);
+        }
+
+        if (scanf("%ld",&num)==0){
+            break;
+            
+        }else if (cnt==0){
+            sum = num;
+
+        }else if(cnt%2==1){
+            sum = sum + num;
+
+        }else if(cnt%2==0){
+            sum = sum - num;
+
+        }
+        cnt++;
+        
+    }
+
+    printf("%ld",sum);
 
     return 0;
 }

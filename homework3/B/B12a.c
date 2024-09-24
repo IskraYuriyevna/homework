@@ -1,21 +1,20 @@
 #include<stdio.h>
-#include<math.h>
 
 void rwxnum(short num,char* arr){
-    unsigned short mask = 1;
-    for (int i=8;i>=0;i--){
+    unsigned short mask = 1<<8*(sizeof(short))-1;
+    for (int i=0;i<=16;i++){
         if (num&mask){;}
         else{arr[i]='-';}
-        mask<<=1;
+        mask>>=1;
     }
 }
 
 int main(){
     short n,i;
-    char rwx[9]="rwxrwxrwx";
+    char rwx[16]="rwxrwxrwxrwxrwxr";
     scanf("%ho",&n);
     rwxnum(n,rwx);
-    for (i=0;i<=8;i++){
+    for (i=0;i<=15;i++){
         printf("%c",rwx[i]);
     }
     

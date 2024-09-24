@@ -1,18 +1,17 @@
-#include<stdio.h>
+#include <stdio.h>
 
 int main(){
-    int i,j,k,l,m;
-    scanf("%d %d %d",&k,&l,&m);
+    float m,n,o,p;int i,j;
+    scanf("%f %f",&m,&n);
 
-    for(i=k-1;i<l;i++){
-        if (i==(k-1)){printf("%*s ",m," ");}
-        else {printf("%*d ",m,i);}
-        for(j=k;j<l-1;j++){
-            if (i==(k-1)){printf("%*d ",m,j);}
-            else {printf("%*d ",m,i*j);}
+    for(j=n-1;j>=0;j--){
+        for (i=0;i<m;i++){
+            o=i/(m-1);
+            p=j/(n-1);
+            printf("(%-4.3f, ",o);
+            printf("%-4.3f) ",p);
         }
-        if (i!=(k-1)){printf("%*d\n",m,i*(l-1));}
-        else {printf("%*d\n",m,l-1);}
+        printf("\n");
     }
 
     return 0;
