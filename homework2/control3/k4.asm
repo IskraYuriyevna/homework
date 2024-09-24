@@ -32,8 +32,6 @@ is2pow:
     pop ebp
     ret
     
-    
-    ;write your code here
-    
+
     
     

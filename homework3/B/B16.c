@@ -1,18 +1,36 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int Strlen(const char *str)
-{
-    int i;
-    for(i=0;str[i];i++){}
+void Swap(int *a,int *b){
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
 
-    return i;
+void bubble_sort(int* Arr,int len){
+    for (int i = 0;i<len-1;i++){
+        for (int j = 0;j<len-i-1;j++){
+            if(Arr[j]%10>Arr[j+1]%10){
+                Swap(Arr + j,Arr+j+1);
+            }
+        }
+    }
 }
 
 int main(){
-    char str[101];
-    int len;
-    scanf("%100[^\n]s",str);
-    len = Strlen(str);
-    printf("%d",len);
+    enum {SIZE = 10};
+    int arr[SIZE];
+
+    for(int i = 0;i<SIZE;i++){
+        scanf("%d",arr+i);
+    }
+
+    bubble_sort(arr,SIZE);
+
+    for (int i = 0; i< SIZE;i++){
+        printf("%d ",arr[i]);
+    }
+    
+    printf("\n");
+    
     return 0;
 }
