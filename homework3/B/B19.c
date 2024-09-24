@@ -1,19 +1,20 @@
-#include<stdio.h>
+#include <stdio.h>
 
-void Strcpy(char *dest,const char *src){
-    int i;
-    for(i=0;src[i];i++)
-        dest[i] = src[i];
-    dest[i]=0;
-}
 
 int main(){
-    char str1[101];
-    char str2[101];
+    char str[100]={0};int cnt=0;
+    fgets(str, sizeof(str), stdin);
+    for(int i;i<100;i++){
+        if(str[i] == '\0'){
+            break;
+        }else if(str[i] == '\n'){
+            continue;
+        }else{
+            cnt++;
+        }
+    }
 
-    scanf("%100[^\n]",str1);
-    Strcpy(str2,str1);
-    printf("%s\n",str2);
+    printf("%d",cnt);
 
     return 0;
 }
