@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 int count_3(int num){
     int cnt = 0;
     while (num>0){
