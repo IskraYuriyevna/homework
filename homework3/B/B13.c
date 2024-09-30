@@ -12,7 +12,7 @@ void rwxnum(short num,char* arr){
 
 int main(){
     short n,i;
-    char rwx[9]="rwxrwxrwx";
+    char rwx[10]="rwxrwxrwx";
     scanf("%ho",&n);
     rwxnum(n,rwx);
     for (i=0;i<=8;i++){
