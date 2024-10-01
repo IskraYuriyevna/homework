@@ -10,14 +10,16 @@ int zeroonten(int num){
 
 int main(){
     int i,n;
+    if(scanf("%d",&n) != 1){
+        return 1;
+    }
     int* a = (int*)malloc(n*sizeof(int));
+
     if (a == NULL){
         printf("Error:can't allocate memory\n");
-
         return 1;
     }
     
-    scanf("%d",&n);
     for(i=0;i<n;i++){
         scanf("%d",&a[i]);
     }

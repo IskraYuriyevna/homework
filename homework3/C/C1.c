@@ -18,7 +18,9 @@ int main(){
         return 1;
     }
     
-    scanf("%d",&n);
+    if(scanf("%d",&n) != 1){
+        return 1;
+    }
     for(i=0;i<n;i++){
         scanf("%d",&a[i]);
     }
