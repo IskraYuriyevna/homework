@@ -16,6 +16,7 @@ int main(){
     }
     for(int i=0;i<N;i++){
         if(scanf("%d",arr+i)!=1){
+            free(arr);
             return 1;
         }
     }
