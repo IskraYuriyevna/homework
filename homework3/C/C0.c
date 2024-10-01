@@ -1,39 +1,44 @@
-#include<stdio.h>
-#include<stdlib.h>
-
-int* maxminswap(int* mec,int n){
-    int i,max=0,min=0;
-    for (i=0;i<n;i++){
-        if(mec[i]>mec[max]){
-            max = i;
-        }else if(mec[i]<mec[min]){
-            min = i;
-        }
-    }
-    i = mec[min];
-    mec[min] = mec[max];
-    mec[max] = i;
-    return mec;
-}
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(){
-    int n,i;
-    int* a = (int*)malloc(n*sizeof(int));
-    if (a == NULL){
-        printf("Error:can't allocate memory\n");
+    int *arr = NULL;
+    int N;
 
+    if(scanf("%d",&N) != 1){
         return 1;
     }
-    
-    scanf("%d",&n);
-    for (i=0;i<n;i++){
-        scanf("%d",&a[i]);    
+
+    arr = (int*)malloc(N*sizeof(int));
+    if(arr == NULL){
+        printf("Can't allocate memory\n");
+        return 1;
     }
-    a = maxminswap(a,n);
-    for (i=0;i<n;i++){
-        printf("%d ",a[i]);
+    for(int i=0;i<N;i++){
+        if(scanf("%d",arr+i)!=1){
+            return 1;
+        }
     }
-    free(a);
-    
+
+    int imax = 0,imin = 0;
+    for(int i = 1;i<N;i++){
+        if(arr[i]>arr[imax]){
+            imax = i;
+        }
+        if(arr[i]<arr[imin]){
+            imin = i;
+        }
+    }
+    int tmp = arr[imax];
+    arr[imax] = arr[imin];
+    arr[imin] = tmp;
+
+    for(int i=0;i<N;i++){
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+
+    free(arr);
+    arr = NULL;
     return 0;
 }
