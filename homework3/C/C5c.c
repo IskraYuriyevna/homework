@@ -1,42 +1,29 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 #include <ctype.h>
 
-void sort(int arr[], int len){
-        int i,j,key;
-        for (i=1;i<len;i++){
-                key = arr[i];
-                j=i-1;
-                while((j>=0) && (arr[j]>key)) {
-                        arr[j+1] = arr[j];
-                        j--;
-                }
-                arr[j+1] = key;
-        }
-}
-
 int main(){ 
-    char *arr = NULL;
-    int *out = NULL;
+    char *low = NULL;
+    int *cap = NULL;
     int size = 10;
     int count = 0;
     int c;
 
     
-    arr = (char*)malloc(size*sizeof(char));
-    if(arr == NULL){
+    low = (char*)malloc(size*sizeof(char));
+    if(low == NULL){
         printf("Can't allocate memory\n");
         return 0;
     }
 
     while((c=getchar())!=EOF&&c!='\n'){
-        arr[count]= c;
+        low[count]= c;
         count++;
         //printf("hr0\n");
         if(count == size){
             char *buf = NULL;
             size *= 2;
-            buf = (char*)realloc(arr,size*sizeof(char));
+            buf = (char*)realloc(low,size*sizeof(char));
             //printf("hr1");
             if(buf == NULL){
                 size /= 2;
@@ -44,7 +31,7 @@ int main(){
                 break;
             }else{
                 //printf("hr2");
-                arr = buf;
+                low = buf;
             }
         }
     }
@@ -52,15 +39,23 @@ int main(){
     int len = count;
     size = 10;
     count = 0;
-    out = (int*)malloc(size*sizeof(int));
-    if(out == NULL){
+    cap = (char*)malloc(size*sizeof(char));
+    if(cap == NULL){
         printf("Can't allocate memory\n");
         return 0;
     }
 
+    for (int i = 0; low[i] != '\0'; i++) {
+        if (islower(low[i])) {
+            continue;
+        } else if (isupper(low[i])) {
+            cap[count++] = low[i];
+        }
+    }
+
     for (int i = 0; i<len; i++) {
         //printf("hr3\n");
-        if (isdigit(arr[i])) {
+        if () {
             int num = 0;
             while (isdigit(arr[i])) {
                 //printf("hr4\n");
@@ -86,14 +81,6 @@ int main(){
             i--;
         }
     }
-
-    sort(out, count);
-
-    for(int i=0;i<count;i++){
-        //printf("hr7\n");
-        printf("%d ", out[i]);
-    }
-    printf("\n");
 
     free(arr);
     free(out);
