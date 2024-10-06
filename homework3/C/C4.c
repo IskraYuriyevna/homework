@@ -37,13 +37,13 @@ int main(){
             char *buf = NULL;
             size *= 2;
             buf = (char*)realloc(arr,size*sizeof(char));
-            //printf("hr1");
+            //printf("hr1\n");
             if(buf == NULL){
                 size /= 2;
                 printf("Can't realloc memory\n");
                 break;
             }else{
-                //printf("hr2");
+                //printf("hr2\n");
                 arr = buf;
             }
         }
