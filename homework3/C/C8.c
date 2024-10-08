@@ -1,48 +1,55 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int find_max(int *arr,int n){
-    int i,max =arr[0];
-    for(i=1;i<n;i++)
-        if(arr[i]>max)
-            max = arr[i];
-    return max;
-}
-
-int sum_max(int **matr,int N,int M){
-    int i,max,sum =0;
-    for(i=0;i<N;i++){
-        max = find_max(matr[i],M);
-        sum += max;
+int Sum_Max(int **A,int Row,int Col){
+    int sum = 0;
+    for(int i = 0;i < Row;i++){
+        int jmax = 0;
+        for(int j = 1;j < Col;j++){
+            if (A[i][j] > A[i][jmax]){
+                jmax = j;
+            }
+        }
+        sum += A[i][jmax];
     }
     return sum;
 }
 
 int main(){
-    int i,j,sum,row,col;
-    int **matr;
-    scanf("%d %d",&row,&col);
-    matr = (int**)malloc(row*sizeof(int*));
-    if (matr == NULL){
-        printf("Error:Can't allocate memory\n");
+    int **Matr = NULL;
+    int Row,Col;
+
+    scanf("%d %d",&Row,&Col);
+
+    Matr = (int**)malloc(Row*sizeof(int*));
+    if (Matr == NULL)
+    {
+        printf("Can't allocate memory\n");
         return 1;
     }
-    for(i=0;i<row;i++){
-        matr[i] = (int*)malloc(col*sizeof(int));
-        if(matr[i] == NULL)
-        {
-            printf("Error:Can't allocate memory\n");
-            return 2;
+    for(int i = 0;i < Row;i++)
+    {
+        Matr[i] = (int*)malloc(Col*sizeof(int));
+        if (Matr[i] == NULL){
+            printf("Can't allocate memory\n");
+            for(int j = 0;j < i ;j++){
+                free(Matr[j]);
+            }
+            free(Matr);
+            return 1;
         }
     }
-    for(i=0;i<row;i++)
-        for(j=0;j<col;j++)
-            scanf("%d",&matr[i][j]);
-    sum = sum_max(matr,row,col);   
-    printf("%d",sum);     
+    for(int i;i < Row;i++){
+        for(int j = 0;j < Col;j++){
+            scanf("%d",Matr[i]+j);//&Matr[i][j]
+        }
+    }
+    printf("%d",Sum_Max(Matr,Row,Col));
 
-    for(i=0;i<row;i++)
-        free(matr[i]);
-    free(matr);
+    for(int i = 0;i < Row;i++){
+        free(Matr[i]);
+    }
+    free(Matr);
+    Matr = NULL;
     return 0;
 }

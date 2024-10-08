@@ -1,34 +1,30 @@
-#include<stdio.h>
+#include <stdio.h>
+enum {Row=10,Col=10};
 
-enum{N=10};
-
-int find_max(int arr[],int n){
-    int max =arr[0];
-    int i;
-    for(i=1;i<n;i++)
-        if (arr[i]>max)
-            max=arr[i];
-    return max;
-}
-
-int sum_max(int (*ptr)[N],int n){
-    int i,max,sum=0;
-    for (i=0;i<n;i++){
-        max = find_max(ptr[i],n);
-        sum += max;
+int Sum_Max(int (*A)[Col],int Row,int Col)
+{
+    int sum = 0;
+    for(int i = 0;i < Row;i++)
+    {
+        int jmax = 0;
+        for(int j = 1; j < Col;j++)
+        {
+            if(A[i][j]>A[i][jmax])
+            jmax = j;
+        }
+        sum += A[i][jmax];
     }
-    return sum;
+return sum;
 }
 
 int main(){
-    int matr[N][N];
-    int i,j,max,sum = 0;
-    for(i=0;i<N;i++){
-            for(j=0;j<N;j++){
-                scanf("%d",&matr[i][j]);
-            }
+    int Matr[Row][Col] = {{0}};
+    for(int i = 0;i<Row;i++){
+        for(int j = 0;j < Col;j++){
+            scanf("%d",Matr[i]+j);
+            
+        }
     }
-    sum = sum_max(matr,N);
-
-    printf("%d\n",sum);
+    printf("%d\n",Sum_Max(Matr,Row,Col));
+    return 0;
 }
