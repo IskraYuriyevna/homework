@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int Mul_mat(){
+int Mul_mat(int Mat1,int Mat2){
+    
+
     return 0;
 }
 
@@ -64,11 +66,12 @@ int main(){
         }
     }
 
+    //Compute matrix multiplication
     if(m!=k){
         return -1;
+    }else{
+        Mul_mat(Mat1,Mat2);
     }
-
-    
 
     freemat(Mat1,n);
     freemat(Mat2,k);
