@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define MAX_CLAUSE 20
 
 struct Date{
     unsigned year;
@@ -100,18 +101,15 @@ void print_date(struct Date *dates ,int size){
 
 
 int main(){
-    struct Date *dates;
-    int count = 0,size = 10;
-    unsigned int y,m,d;
+    struct Date dates[MAX_CLAUSE];
+    initialize_dates(dates, MAX_CLAUSE);
+    unsigned int i,y,m,d,size = 0;
 
-    dates = (struct Date*)malloc(size*sizeof(struct Date));
-    if(dates == NULL){
-        printf("Can't allocate memory\n");
-        return 0;
-    }
-
-    while(scanf("%u %u %u",&y,&m,&d)!=EOF){
-        int leap = 0; 
+    for(i=0;i<MAX_CLAUSE;i++){
+        int leap = 0;
+        if(scanf("%u %u %u",&y,&m,&d)==EOF){
+            break;
+        }       
 
         if ((y%4==0)&&(y%400!=0)){
             leap = 1;
@@ -161,32 +159,17 @@ int main(){
                 }
             }
         }
-
-        dates[count].year = y;
-        dates[count].month = m;
-        dates[count].day = d;        
-        //printf("input successfully\n");   
-        count++;    
         
-        if(count == size){
-            struct Date *buf = NULL;
-            size *= 2;
-            buf = (struct Date*)realloc(dates,size*sizeof(struct Date));
-            if(buf == NULL){
-                size /= 2;
-                printf("Can't realloc memory\n");
-                break;
-            }else{
-                dates = buf;
-            }
-        }
-        if (count==20){
-            break;
-        }
+
+        dates[size].year = y;
+        dates[size].month = m;
+        dates[size].day = d;        
+        //printf("input successfully\n");
+        size++;
     }
     //printf("%d",size);
-    date_sort(dates,count);
-    print_date(dates,count);
+    date_sort(dates,size);
+    print_date(dates,size);
 
     return 0;
 }
