@@ -12,30 +12,54 @@ struct node{
 int insert_element(struct node *head, const char *find_str, const char *insert_str)
     //insert element *insert_str after find_str
 {
-    struct node *cur = head,*insert=NULL;
+    struct node *cur = head;
+    struct node *insert=NULL,*tmp=NULL;
 
     if (cur == NULL){
         //if the list is emptyhead
         //printf("empty\n");
         return 1;
     }
-    while (cur != NULL){
+    if(cur->next == NULL){
+        //if only one element in the list
         if(strcmp(cur->str,find_str)==0){
+            insert = (struct node*)malloc(sizeof(struct node));
+            if(insert == NULL){return 1;}
+            strcpy(insert->str,insert_str);
+            cur->next = insert;
+            insert->prev = cur;
+            return 0;
+        }else{
+            return 1;
+        }
+    }else{
+        while(1){
+            if(strcmp(cur->str,find_str)==0){
+                tmp = cur->next;
                 insert = (struct node*)malloc(sizeof(struct node));
                 if(insert == NULL){return 1;}
                 strcpy(insert->str,insert_str);
-                if (cur->next){
-                    cur->next->prev = insert;
-                    insert->next = cur->next;
-                    cur->next = insert;
-                    insert->prev = cur;
-                }else{
-                    cur->next = insert;
-                    insert->prev = cur;
-                    insert->next = NULL;
-                }
+                cur->next = insert;
+                insert->prev = cur;
+                insert->next = tmp;
+                tmp->prev = insert;  
                 return 0;
-        }else{
+            }
+            
+            if (cur->next == NULL){
+                if(strcmp(cur->str,find_str)==0){
+                    insert = (struct node*)malloc(sizeof(struct node));
+                    if(insert == NULL){return 1;}
+                    strcpy(insert->str,insert_str);
+                    cur->next = insert;
+                    insert->prev = cur;
+                    return 0;
+                }else{
+                    return 1;
+                }        
+                //if none of element conform to find_str
+                break;
+            }
             cur = cur->next;
         }
     }
@@ -61,7 +85,7 @@ void Print_forward(struct node *cur)
 {
     if(cur == NULL)
     {
-        //printf("empty\n");
+        printf("empty\n");
         return;
     }
     while(cur)
