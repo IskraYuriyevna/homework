@@ -25,11 +25,13 @@ int insert_element(struct node *head, const char *find_str, const char *insert_s
                 if(insert == NULL){return 1;}
                 strcpy(insert->str,insert_str);
                 if (cur->next){
+                    //if add in the middle
                     cur->next->prev = insert;
                     insert->next = cur->next;
                     cur->next = insert;
                     insert->prev = cur;
                 }else{
+                    //if add at the and
                     cur->next = insert;
                     insert->prev = cur;
                     insert->next = NULL;
@@ -39,6 +41,7 @@ int insert_element(struct node *head, const char *find_str, const char *insert_s
             cur = cur->next;
         }
     }
+    // if none of strings match
     return 1;
 }
 
