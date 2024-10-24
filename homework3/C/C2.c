@@ -23,10 +23,23 @@ int main(){
     for(i=0;i<n;i++){
         scanf("%d",&a[i]);
     }
+
+    int *b = (int*)malloc(n*sizeof(int));
+    int cnt = 0;
+    if(b == NULL){
+        printf("Error:can't allocate memort\n");
+        return 1;
+    }
+
     for(i=0;i<n;i++){
         if(zeroonten(a[i])==1){
-            printf("%d ",a[i]);
+            b[cnt]=a[i];
+            cnt++;
         }
+    }
+
+    for(i=0;i<cnt;i++){
+        printf("%d ",b[i]);
     }
     
     free(a);
