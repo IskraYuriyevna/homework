@@ -9,7 +9,7 @@ int zeroonten(int num){
 }
 
 int main(){
-    int i,n;
+    int i,n,cnt=0;
     if(scanf("%d",&n) != 1){
         return 1;
     }
@@ -22,19 +22,22 @@ int main(){
     
     for(i=0;i<n;i++){
         scanf("%d",&a[i]);
+        if(zeroonten(a[i])==1){
+            cnt++;
+        }
     }
 
-    int *b = (int*)malloc(n*sizeof(int));
-    int cnt = 0;
+    int *b = (int*)malloc(cnt*sizeof(int));
     if(b == NULL){
         printf("Error:can't allocate memort\n");
         return 1;
     }
 
+    int j=0;
     for(i=0;i<n;i++){
         if(zeroonten(a[i])==1){
-            b[cnt]=a[i];
-            cnt++;
+            b[j]=a[i];
+            j++;
         }
     }
 
@@ -43,5 +46,6 @@ int main(){
     }
     
     free(a);
+    free(b);
     return 0;
 }
