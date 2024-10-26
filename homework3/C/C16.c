@@ -4,9 +4,11 @@
 
 struct color
 {
-    char name_color[20];//color name
+    char name[20];//color name
     int count;//how much times this color showed
 };
+
+int add_element (struct color *clm,const char *buf,int *ptr_num_colors);
 
 int main(){
     struct color Color[MAX_STRINGS];
@@ -16,21 +18,28 @@ int main(){
     while(scanf("%19s",buf)!=EOF){
         int exist = 0;
         for(int i = 0;i < num_colors;i++){
-            if(strcmp(Color[i].name_color,buf) == 0){
+            if(strcmp(Color[i].name,buf) == 0){
                 Color[i].count++;
                 exist = 1;
             }
         }
         if(!exist){
-            if (num_colors >= MAX_STRINGS)
+            if (add_element(&Color[num_colors],buf,&num_colors))
                 break;
-            strcpy(Color[num_colors].name_color,buf);
-            Color[num_colors].count = 1;
-            num_colors++;
         }
     }
     for (int i = 0;i<num_colors;i++)
-        printf("%s %d\n",Color[i].name_color, Color[i].count);
+        printf("%s %d\n",Color[i].name, Color[i].count);
 
+    return 0;
+}
+
+int add_element (struct color *clm,const char *buf,int *ptr_num_colors)
+{
+    if (*ptr_num_colors >= MAX_STRINGS)
+        return 1;
+    strcpy(clm->name,buf);
+    clm->count = 1;
+    (*ptr_num_colors)++;
     return 0;
 }

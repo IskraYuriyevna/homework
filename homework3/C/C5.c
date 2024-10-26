@@ -18,43 +18,57 @@
 //     }
 // }
 
+void convert_string(char *str,int len) {
+    int i, cnt=0;
 
-char *strcat(char *dest, const char *src) {
-    char *ptr = dest; 
-
-    while (*ptr != '\0') {
-        ptr++;
-    }
-
-    while (*src != '\0') {
-        *ptr = *src;
-        ptr++;
-        src++;
-    }
-    *ptr = '\0';
-
-    return dest;
-}
-
-void convert_string(char str[],int len) {
-    char low[len],upr[len];
-    int leb_l=0,leb_u=0;
-    for (int i = 0; i < len; i++) {
+    for (i = 0; i < len; i++) {
         if (str[i] >= 'a' && str[i] <= 'z') {
-            low[leb_l]=str[i];
-            leb_l++;
-        } else if (str[i] >= 'A' && str[i] <= 'Z') {
-            upr[leb_u]=str[i];
-            leb_u++;
+            char temp = str[i];
+            for (int j = i; j > cnt; j--) {
+                str[j] = str[j-1];
+            }
+            str[cnt++] = temp;
         }
     }
-    low[leb_l] = '\0';
-    upr[leb_u] = '\0';
-    strcat(low,upr);
-    for (int i=0;i<len;i++){
-        str[i] = low[i];
-    }
 }
+
+
+// char *strcat(char *dest, const char *src) {
+//     char *ptr = dest; 
+
+//     while (*ptr != '\0') {
+//         ptr++;
+//     }
+
+//     while (*src != '\0') {
+//         *ptr = *src;
+//         ptr++;
+//         src++;
+//     }
+//     *ptr = '\0';
+
+//     return dest;
+// }
+
+// void convert_string(char str[],int len) {
+//     char low[len],upr[len];
+//     int leb_l=0,leb_u=0;
+//     for (int i = 0; i < len; i++) {
+//         if (str[i] >= 'a' && str[i] <= 'z') {
+//             low[leb_l]=str[i];
+//             leb_l++;
+//         } else if (str[i] >= 'A' && str[i] <= 'Z') {
+//             upr[leb_u]=str[i];
+//             leb_u++;
+//         }
+//     }
+//     low[leb_l] = '\0';
+//     upr[leb_u] = '\0';
+//     strcat(low,upr);
+//     for (int i=0;i<len;i++){
+//         str[i] = low[i];
+//     }
+// }
 
 
 int main(){
