@@ -1,0 +1,5 @@
+This is a first string.
+This string is very large, size about 50 symbols.
+This is a third string.
+Look! And this string is large too.
+The last string.

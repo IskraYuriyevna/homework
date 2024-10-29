@@ -35,10 +35,12 @@ int main(int argc,char **argv){
     }
     
     int count = 0;
-    while (fgets(buf,SIZE,fin)!=NULL && count < num_str_copy)
+    int ch;
+    while ((ch = fgetc(fin)) != EOF && count < num_str_copy)
     {
-        count ++;
-        fputs(buf,fout);
+        if(ch == '\n')
+            count ++;
+        fputc(ch,fout);
     }
     
     fclose(fin);
