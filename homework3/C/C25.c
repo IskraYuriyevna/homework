@@ -20,7 +20,7 @@ int main(int argc,char **argv)
     fout = fopen(argv[2],"w");
     if(fout == NULL)
     {
-        fprintf(stderr,"Can't opne %s file\n",argv[2]);
+        fprintf(stderr,"Can't open %s this file\n",argv[2]);
         fclose(fin);
         return 2;
     }
