@@ -1,49 +1,92 @@
-#include<stdio.h>
-#include<fcntl.h>
-#include<unistd.h>
-#include<sys/stat.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <stdlib.h>
 
-#define BUF_SIZE 256
+#define BUF_SIZE 99
 
-int main(int argc,char *argv[]){
-    int fd1,fd2,size,cnt=0,j=0;
+int main(int argc,char **argv){
+    int fd1,fd2,size,cnt=0,i=0,j=0,k=0;
     char buf[BUF_SIZE];
-    char otst[2*BUF_SIZE];
-    struct stat s;
+    char *in = NULL;
 
     if(argc<3){
-       fprintf(stderr,"Use: %s file1 file2",argv[0]);
-       return 1;
+        printf("Use: %s flie_source file_dest\n",argv[0]);
+        return 1;
+    }   
+    
+    fd1 = open(argv[1],O_RDONLY);
+    if(fd1==-1){
+        perror("open");
+        return 2;
+    } 
+
+    struct stat s;
+    stat(argv[1],&s);
+    fd2 = open(argv[2],O_WRONLY | O_CREAT | O_TRUNC,s.st_mode);
+    if(fd2==-1){
+        perror("open2");
+        close(fd2);
+        return 2;
     }
 
-    fd1 = open(argv[1],O_RDONLY);
-    if(fd1 == -1){
-        fprintf(stderr,"Error:Can't open %s",argv[1]);
+    int sizein = BUF_SIZE;
+    in = (char *)malloc(sizein*sizeof(char));
+    if(in == NULL){
+        printf("Can't allocate memory\n");
         return 1;
     }
-    stat(argv[1],&s);
-    fd2 = open(argv[2],O_WRONLY | O_CREAT | O_TRUNC,s.st_mode);    
-    if(fd2 == -1){
-        fprintf(stderr,"Error:Can't open %s",argv[2]);
-        close(fd1);
-        return 1;
-    }
-   
+
     while((size = read(fd1,buf,BUF_SIZE)) > 0){
-        for(int i=0;i<size;i++){
-            if((buf[i]!=','&buf[i]!='.'&buf[i]!=' '&buf[i]!='\n')){otst[j]=buf[i]; cnt = cnt+1;j++;}
-            else{
-                if(cnt!=0&cnt<=99){otst[j]=(int)(cnt+48);j++;}
-                otst[j]=buf[i];j++;cnt=0;
-            //printf("(%d,%d)",i,j);
+        for(i = 0;i<size;i++){
+            in[cnt]=buf[i];
+            cnt++;
+        }
+        if (cnt == sizein){
+            char *buf2 = NULL;
+            sizein *= 2;
+            buf2 = (char*)realloc(in,sizein*sizeof(char));
+            if(buf2==NULL){
+                sizein /= 2;
+                printf("Can't realloc memory\n");
+                break;
+            }else{
+                in = buf2;
             }
         }
-        write(fd2,otst,j);
-    } 
-    //printf("buf = %s",buf);
-    //printf("output stream,%s",otst);
+    }
+    //printf("cnt= %d,sizein = %d\n",cnt,sizein);
 
-close(fd1);
-close(fd2);
-return 0;
+    sizein = cnt;
+    char out[sizein*2];
+    cnt = 0;j=0;
+    for(i=0;i<sizein;i++){
+        if(((in[i]!=',')&(in[i]!='.')&(in[i]!=' ')&(in[i]!='\n')))
+        {
+            out[j]=in[i]; 
+            cnt = cnt+1;
+            j++;
+        }else{
+            if((cnt!=0)&(cnt<=99)){
+                if((cnt>0)&(cnt<=9)){
+                    out[j]=cnt+'0';
+                    j++;
+                }else{
+                    out[j+1]= cnt%10+'0';
+                    out[j]= cnt/10+'0';
+                    j+=2;
+                }
+            }
+            out[j]=in[i];
+            j++;
+            cnt=0;
+        }
+    }
+    write(fd2,out,j-1);
+
+    free(in);
+    close(fd1);
+    close(fd2);    
+    return 0;
 }
