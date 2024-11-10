@@ -188,5 +188,6 @@ int main(){
     date_sort(dates,count);
     print_date(dates,count);
 
+    free(dates);
     return 0;
 }
