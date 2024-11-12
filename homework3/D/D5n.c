@@ -2,6 +2,7 @@
 #include<fcntl.h>
 #include<unistd.h>
 #include<sys/stat.h>
+#define BUF_SIZE 1001
 
 int main(int argc,char **argv){
     if(argc<2){
@@ -22,14 +23,14 @@ int main(int argc,char **argv){
         return 2;
     }
 
-
-    int i,j,h=1,gap,tmp,inum,jnum,tnum;
-    off_t iP,jP;
+    int i,j,h=1,inum,jnum,tnum;
+    //off_t iP,jP,tP;
     struct stat sfd;
+    stat(argv[1],&sfd);
     long size = sfd.st_size / sizeof(int);
     if(read(fd,&i,sizeof(int))==sizeof(int))
     {
-        tmp = i;
+        ;
     }else{
         close(fd);
         close(fd2);
@@ -41,22 +42,28 @@ int main(int argc,char **argv){
     }
     while (h >= 1) {
         for (int i = h; i < size; i++) {
-                inum = read(fd,,sizeof(int));
-                jnum = read(fd,,sizeof(int));
-                tnum = read(fd,,sizeof(int));
-            for (int j = i; j >= h && array[j] < array[j - h]; j -= h) {
-                swap(array[j], array[j - h]);
-                jnum = read(fd,,);
-                tnum = ;
-                lseek(fd,,SEEK_SET);
-                write(fd,,sizeof(int));
-                lseek(fd,,SEEK_SET);
-                write(fd,,sizeof(int));
+                lseek(fd,i*sizeof(int),SEEK_SET);
+                read(fd,&inum,sizeof(int));
+                read(fd,&jnum,sizeof(int));
+                lseek(fd,(i-h)*sizeof(int),SEEK_SET);
+                read(fd,&tnum,sizeof(int));
+            for (j = i; j >= h && jnum > tnum; j -= h) {
+                lseek(fd,j*sizeof(int),SEEK_SET);
+                read(fd,&jnum,sizeof(int));
+                lseek(fd,(j-h)*sizeof(int),SEEK_SET);
+                read(fd,&tnum,sizeof(int));
+                write(fd,&jnum,sizeof(int));
+                lseek(fd,j*sizeof(int),SEEK_SET);
+                write(fd,&tnum,sizeof(int));
             }
         }
         h = h / 3;
     }
 
+    char buf[BUF_SIZE];
+    while((size = read(fd,buf,BUF_SIZE))>0){
+        write(fd2,buf,size);
+    }
 
     close(fd);
     close(fd2);
