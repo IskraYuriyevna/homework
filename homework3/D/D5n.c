@@ -23,32 +23,40 @@ int main(int argc,char **argv){
     }
 
 
-    int i,j,gap,tmp;
-    off_t iP,jP,nP;
+    int i,j,h=1,gap,tmp,inum,jnum,tnum;
+    off_t iP,jP;
     struct stat sfd;
     long size = sfd.st_size / sizeof(int);
     if(read(fd,&i,sizeof(int))==sizeof(int))
     {
         tmp = i;
-        iP = 0;
     }else{
         close(fd);
         close(fd2);
         return 0;
     }
-    for(gap = size>>1;gap > 0;gap>>=1){
-        while(read(fd,&i,sizeof(int))==sizeof(int))
-        {
-            tmp = i;
-            iP = lseek(fd,,SEEK_CUR)-sizeof(int);
-            jP = ;
-            for(jP = iP-(gap*sizeof(int));jP>=0&&j>tmp;jP-=gap*(sizeof(int))){
-                jP+;
-            }
-            jP = ;
-        }
+
+    while (h < size / 3) {
+        h = 3 * h + 1;
     }
-    
+    while (h >= 1) {
+        for (int i = h; i < size; i++) {
+                inum = read(fd,,sizeof(int));
+                jnum = read(fd,,sizeof(int));
+                tnum = read(fd,,sizeof(int));
+            for (int j = i; j >= h && array[j] < array[j - h]; j -= h) {
+                swap(array[j], array[j - h]);
+                jnum = read(fd,,);
+                tnum = ;
+                lseek(fd,,SEEK_SET);
+                write(fd,,sizeof(int));
+                lseek(fd,,SEEK_SET);
+                write(fd,,sizeof(int));
+            }
+        }
+        h = h / 3;
+    }
+
 
     close(fd);
     close(fd2);
