@@ -59,14 +59,26 @@ int main(int argc,char **argv){
     }
     //printf("sin= %d,sizein = %d\n",sin,sizein);
 
-    int sizeout = sin;
+    int sizeout = sin*2;
     out = (char *)malloc(sizein*sizeof(char));
     if(out == NULL){
         fprintf(stderr,"Can't allocate memory\n");
         return 1;
     }
     cnt = 0;j=0;
-    for(i=0;i<sizein;i++){
+    for(i=0;i<sin;i++){        
+        if (j == sizeout-1){
+            char *bufout = NULL;
+            sizeout *= 2;
+            bufout = (char*)realloc(out,sizeout*sizeof(char));
+            if(bufout==NULL){
+                sizeout /= 2;
+                fprintf(stderr,"Can't realloc memory\n");
+                break;
+            }else{
+                out = bufout;
+            }
+        }
         if(((in[i]!=',')&(in[i]!='.')&(in[i]!=' ')&(in[i]!='\n')))
         {
             out[j]=in[i]; 
@@ -88,18 +100,7 @@ int main(int argc,char **argv){
             j++;
             cnt=0;
         }
-        if (j == sizeout){
-            char *bufout = NULL;
-            sizeout *= 2;
-            bufout = (char*)realloc(out,sizeout*sizeof(char));
-            if(bufout==NULL){
-                sizeout /= 2;
-                fprintf(stderr,"Can't realloc memory\n");
-                break;
-            }else{
-                out = bufout;
-            }
-        }
+
     }
     write(fd2,out,j-1);
 
