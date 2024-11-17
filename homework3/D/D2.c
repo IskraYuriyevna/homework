@@ -7,7 +7,7 @@
 #define BUF_SIZE 99
 
 int main(int argc,char **argv){
-    int fd1,fd2,size,cnt,sin=0,sout=0,i=0,j=0,k=0;
+    int fd1,fd2,size,cnt,sin=0,i=0,j=0,k=0;
     char buf[BUF_SIZE];
     char *in = NULL;
     char *out = NULL;
@@ -65,14 +65,14 @@ int main(int argc,char **argv){
         fprintf(stderr,"Can't allocate memory\n");
         return 1;
     }
-    cnt = 0;j=0;sout=0;
+    cnt = 0;j=0;
     for(i=0;i<sizein;i++){
         if(((in[i]!=',')&(in[i]!='.')&(in[i]!=' ')&(in[i]!='\n')))
         {
             out[j]=in[i]; 
             cnt = cnt+1;
             j++;
-            sout++;
+
         }else{
             if((cnt!=0)&(cnt<=99)){
                 if((cnt>0)&(cnt<=9)){
@@ -87,9 +87,8 @@ int main(int argc,char **argv){
             out[j]=in[i];
             j++;
             cnt=0;
-            sout++;
         }
-        if (sout == sizeout){
+        if (j == sizeout){
             char *bufout = NULL;
             sizeout *= 2;
             bufout = (char*)realloc(out,sizeout*sizeof(char));
