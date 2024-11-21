@@ -26,7 +26,7 @@ int main(){
         //父进程等待子进程结束后再结束
     }
 
-    while((pid=wait(NULL))>0);
+    wait(NULL);
     //等待所有子进程结束之后再结束
     return 0;
 }
