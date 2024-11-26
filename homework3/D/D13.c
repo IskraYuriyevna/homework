@@ -22,7 +22,8 @@ int main(int argc,char **argv)
         
 		if (dup2(fd[1],1)<0){perror("dup2");return 1;}
         close(fd[0]);close(fd[1]);
-		close(fd2[0]);close(fd2[1]);execlp(argv[1],argv[1],argv[2],NULL);
+		close(fd2[0]);close(fd2[1]);
+        execlp(argv[1],argv[1],argv[2],NULL);
 		perror("execlp");
 		return 4;
 	}

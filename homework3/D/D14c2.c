@@ -5,8 +5,8 @@
 #include<sys/wait.h>
 
 int main(int argc,char **argv){
-    // 虽然可以有任意个命令，但最少不能少于四个参数
-    if (argc < 4) {
+    // 虽然可以有任意个命令，但最少不能少于两个参数
+    if (argc < 2) {
         fprintf(stderr, "Usage: %s cmd1 arg1 ...| cmd2 arg2 ...| ...\n", argv[0]);
         return 1;
     }
@@ -16,6 +16,7 @@ int main(int argc,char **argv){
     char ***cmd = malloc(sizeof(char **) * (argc/2+1));
     int ncmd = 0;//number of commands
     int narg = 0;//number of arguments
+    int pcnt = 0;//process count
 
     // 创建第二层数组的第一个，并分配存储空间
     cmd[ncmd] = malloc(sizeof(char *) * (argc+1));
@@ -44,34 +45,20 @@ int main(int argc,char **argv){
     cmd[ncmd][narg] = NULL; // 在最后一个命令结尾添加NULL表示命令结束
     ncmd++;
 
-    //创建一个二维数组储存所有的管道，其中管道的数量比命令数量少1，共ncmd-1个
+    //创建一个二维数组储存所有的管道，其中管道的数量比命令数量少1
     int **fd = malloc(sizeof(int*)*(ncmd-1));
-    if(fd == NULL){
-        for(int i=0;i<ncmd;i++){
-            free(cmd[i]);
-        }
-        free(cmd);
-        fprintf(stderr,"Can't allocate memory\n");
-        return 2;
-    }
+    if(fd == NULL){}
 
     //创建所有管道
     for(int i=0;i<(ncmd-1);i++){
-        fd[i]=malloc(sizeof(int)*2);
-        
+        int fd[i][2];
         if (pipe(fd[i])==-1){
             perror("pipe");
-            for (int j = 0; j < i; j++) {
-                close(fd[j][0]);
-                close(fd[j][1]);
-                free(fd[j]);
-            }
-            free(fd);
             return 3;
         }
     }
 
-    //创建子进程并运行命令，子进程数量就是ncmd
+    // 创建子进程并运行命令，子进程数量就是ncmd
     for (int i=0;i<ncmd;i++) {
         //创建子进程
         pid_t pid = fork();
@@ -81,11 +68,14 @@ int main(int argc,char **argv){
         }
         // 子进程
         if (pid == 0) {            
-            if(i>0){
-                if(dup2(fd[i-1][0],0)<0){perror("dup2");return 1;}
-            }
-            if(i<ncmd-1){
-                if(dup2(fd[i][1],1)<0){perror("dup2");return 1;}
+            pcnt++;
+            if(pcnt==0){//第一个子进程,只需要写端
+                if (dup2(fd[ncmd-2][0],0)<0){perror("dup2");return 1;}
+            }else if(pcnt==ncmd-1){//最后一个子进程，只需要读端
+                if (dup2(fd[0][0],0)<0){perror("dup2");return 1;}
+            }else{//第pcnt个子进程
+                if (dup2(fd[ncmd-pcnt-1][0],0)<0){perror("dup2");return 1;}
+                if (dup2(fd[ncmd-pcnt][1],1)<0){perror("dup2");return 1;}
             }
             //关闭所有管道
             for (int j=0;j<(ncmd-1);j++) {
@@ -100,22 +90,18 @@ int main(int argc,char **argv){
     // 父进程，这个爹的孩子还可能特别多
     // 关闭所有管道
     for (int i=0;i<(ncmd-1);i++) {
-        // printf("Read end: %d\n", fd[i][0]);
-        // printf("Write end: %d\n", fd[i][1]);
         close(fd[i][0]);close(fd[i][1]);
     }
     // 等待所有子进程结束
     for (int i=0;i<ncmd;i++) {
         wait(NULL);
     }
-    //释放动态分配的内存
-    for(int i=0;i<ncmd;i++){
+    // 释放动态分配的内存
+    for (int i=0;i<ncmd;i++) {
         free(cmd[i]);
+        free(fd[i]);
     }
     free(cmd);
-    for (int j=0;j<ncmd-1;j++) {
-            free(fd[j]);
-    }
     free(fd);
 
     return 0;

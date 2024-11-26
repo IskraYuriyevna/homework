@@ -22,7 +22,7 @@ int main(){
         wait(NULL);
     }
     //wait(NULL);
-    for(int i=0;i<n;i++){wait(NULL);}
+    //for(int i=0;i<n;i++){wait(NULL);}
     //等待所有子进程结束之后再结束
     return 0;
 }
