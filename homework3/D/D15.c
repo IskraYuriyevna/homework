@@ -5,8 +5,11 @@
 
 
 volatile sig_atomic_t flag = 0;
+//volatile 关键字确保变量在信号处理函数中被修改时，主线程能够看到最新的值。
+//sig_atomic_t 是一个保证在信号处理函数中安全使用的类型。
 void SigHandler(int s){
     signal(SIGUSR1,SigHandler);
+    //重新注册 SIGUSR1 信号的处理函数，确保每次接收到 SIGUSR1 信号时都会调用 SigHandler。
     flag = 1;
 }
 
