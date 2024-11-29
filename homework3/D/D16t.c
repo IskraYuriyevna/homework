@@ -35,35 +35,31 @@ volatile int cnti = 0;//count of SIGINT
 volatile int cntq = 0;//count of SIGQUIT
 volatile sig_atomic_t flag = 0,flag2 = 0;
 
-void SigHandler(int s){
-    signal(SIGINT,SigHandler);
-    signal(SIGQUIT,SigHandler);//for System V
-    switch(s){
-        case SIGINT:    
-            if(cnti<5){
-                cnti++;
-                flag = 1;
-            }
-            else 
-            {
-                signal(SIGQUIT,SIG_DFL);
-                signal(SIGINT,SIG_DFL);
-                kill(getpid(),SIGINT);
-            }
-            break;
+void IntHandler(int s){
+    signal(SIGINT,IntHandler);//for System V
 
-        case SIGQUIT:
-                cntq++;
-                flag2 = 1;
-            break;
+    if(cnti<5){
+        cnti++;
+        flag = 1;
     }
+    else 
+    {
+        signal(SIGQUIT,SIG_DFL);
+        signal(SIGINT,SIG_DFL);
+        kill(getpid(),SIGINT);
+    }
+}
+
+void QuitHandler(int s){
+    signal(SIGQUIT,QuitHandler);//for System V                
+    cntq++;
 }
 
 int main()
 {
     // установка сигналов    
-    signal(SIGQUIT,SigHandler);
-    signal(SIGINT,SigHandler);
+    signal(SIGQUIT,QuitHandler);
+    signal(SIGINT,IntHandler);
 
     pid_t pid = fork();
     if (pid > 0)
@@ -76,9 +72,11 @@ int main()
 
     while(1){
         if(flag){
-            flag=0;
-            printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);fflush(stdout);
-            cntq=0;
+            int t1=cnti;int t2=cntq;
+            flag=0;cntq=0;  
+            printf("SIGINT %d SIGQUIT %d\n",t1,t2);fflush(stdout);
+            //printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);fflush(stdout);
+            //cntq=0;
             if(cnti==5){
                 signal(SIGINT,SIG_DFL);
                 kill(getpid(),SIGINT);
