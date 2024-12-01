@@ -41,8 +41,11 @@ void IntHandler(int s){
     if(cnti<5){
         cnti++;
         flag = 1;
-        printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);
-        write(stdout,"SIGINT ",);fflush(stdout);
+        //printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);
+        write(stdout,"SIGINT ",sizeof("SIGINT "));
+        write(stdout,,sizeof());
+        write(stdout,"SIGQUIT ",sizeof("SIGQUIT "));
+        write(stdout,,sizeof());fflush(stdout);
     }
     else 
     {
