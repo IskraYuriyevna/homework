@@ -41,6 +41,8 @@ void IntHandler(int s){
     if(cnti<5){
         cnti++;
         flag = 1;
+        printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);
+        write(stdout,"SIGINT ",);fflush(stdout);
     }
     else 
     {
@@ -72,15 +74,9 @@ int main()
 
     while(1){
         if(flag){
-            int t1=cnti;int t2=cntq;
-            flag=0;cntq=0;  
-            printf("SIGINT %d SIGQUIT %d\n",t1,t2);fflush(stdout);
+            flag=0; 
             //printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);fflush(stdout);
             //cntq=0;
-            if(cnti==5){
-                signal(SIGINT,SIG_DFL);
-                kill(getpid(),SIGINT);
-            }
         }
     }
 
