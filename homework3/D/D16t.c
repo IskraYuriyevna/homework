@@ -33,52 +33,15 @@ void test_signal(pid_t pid)
 
 volatile int cnti = 0;//count of SIGINT
 volatile int cntq = 0;//count of SIGQUIT
-volatile sig_atomic_t flag = 0,flag2 = 0;
-
-char* itoa(int num,char* buf){
-    char* str=buf;
-
-    if(num == 0){
-        *str++ = '0';
-        *str = '\0';
-        return buf;
-    }else{
-        while(num > 0){
-            *str++ = (num%10)+'0';
-            num/=10;
-        }
-        *str = '\0';
-    }
-
-    char* l = buf;
-    char* r = str-1;
-    while(l<r){
-        char temp = *l;
-        *l++ = *r;
-        *r-- = temp;
-    }
-
-    return buf;
-}
+volatile sig_atomic_t flag = 0;
+int t1;
 
 void IntHandler(int s){
     signal(SIGINT,IntHandler);//for System V
-
-    if(cnti<5){
-        cnti++;
-        flag = 1;
-        //printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);
-        write(stdout,"SIGINT ",sizeof("SIGINT "));
-        write(stdout,,sizeof());
-        write(stdout,"SIGQUIT ",sizeof("SIGQUIT "));
-        write(stdout,,sizeof());fflush(stdout);
-    }
-    else 
-    {
-        signal(SIGQUIT,SIG_DFL);
-        signal(SIGINT,SIG_DFL);
-        kill(getpid(),SIGINT);
-    }
+    cnti++;
+    flag=1;
+    t1=cntq;
+    cntq=0;
 }
 
 void QuitHandler(int s){
@@ -102,10 +65,13 @@ int main()
     // код процесса-сына
 
     while(1){
-        if(flag){
-            flag=0; 
-            //printf("SIGINT %d SIGQUIT %d\n",cnti,cntq);fflush(stdout);
-            //cntq=0;
+        if(flag==1){
+            flag=0;
+            printf("SIGINT %d SIGQUIT %d\n",cnti,t1);fflush(stdout);
+            if(cnti==5){
+                signal(SIGINT,SIG_DFL);
+                kill(getpid(),SIGINT);
+            }
         }
     }
 
