@@ -35,6 +35,32 @@ volatile int cnti = 0;//count of SIGINT
 volatile int cntq = 0;//count of SIGQUIT
 volatile sig_atomic_t flag = 0,flag2 = 0;
 
+char* itoa(int num,char* buf){
+    char* str=buf;
+
+    if(num == 0){
+        *str++ = '0';
+        *str = '\0';
+        return buf;
+    }else{
+        while(num > 0){
+            *str++ = (num%10)+'0';
+            num/=10;
+        }
+        *str = '\0';
+    }
+
+    char* l = buf;
+    char* r = str-1;
+    while(l<r){
+        char temp = *l;
+        *l++ = *r;
+        *r-- = temp;
+    }
+
+    return buf;
+}
+
 void IntHandler(int s){
     signal(SIGINT,IntHandler);//for System V
 
