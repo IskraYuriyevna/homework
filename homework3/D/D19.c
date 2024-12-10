@@ -60,7 +60,7 @@ int main(){
             close(fd[0]);close(fd[1]);
             //wait(NULL);wait(NULL);
             semctl(semid,0,IPC_RMID,0);
-            //printf("father terminate\n");
+            //printf("father terminated\n");
         }else{//son2
             while(Cnt.Inc<=Cnt.Dec){
                 semop(semid,&P3,1);
