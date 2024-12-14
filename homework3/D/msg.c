@@ -38,9 +38,9 @@ int main(){
             case 'Q':
                 strcpy(message.data,"Quit");
                 message.mtype = 1;
-                msgsnd(msgid,&message,strlen(("Quit")+1),0);
+                msgsnd(msgid,&message,strlen(("Quit"))+1,0);
                 message.mtype = 2;
-                msgsnd(msgid,&message,strlen(("Quit")+1),0);
+                msgsnd(msgid,&message,strlen(("Quit"))+1,0);
                 sleep(1);
                 msgctl(msgid,IPC_RMID,0);//delete
                 return 0;
