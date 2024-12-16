@@ -119,7 +119,7 @@ int main(){
                 //printf("son3 terminated\n");
                 free(str);
             }else{//father
-
+            
                 //printf("DATA: %ld\n",strlen(message.data));
                 //printf("STR: %ld\n",strlen(str));
                 while(1){
