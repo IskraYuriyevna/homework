@@ -40,14 +40,14 @@ int msg_ping_pong_1(key_t key){
     return 0;
 }
 
-// int main(){
-//     struct msgbuf message;
+int main(){
+    struct msgbuf message;
 
-//     key_t key=ftok("aaa.txt",8);
-//     if(key<0){perror("ftok");return 1;}
+    key_t key=ftok("aaa.txt",8);
+    if(key<0){perror("ftok");return 1;}
 
-//     if(msg_ping_pong_1(key)==1){
-//         return 1;
-//     }
-//     return 0;
-// }
+    if(msg_ping_pong_1(key)==1){
+        return 1;
+    }
+    return 0;
+}
