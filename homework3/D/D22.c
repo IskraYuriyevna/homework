@@ -9,7 +9,7 @@
 
 struct msgbuf{
     long mtype;
-    char data[256]
+    char data[256];
 };
 
 int main(){
@@ -114,5 +114,18 @@ int main(){
             //printf("son3 terminated\n");
     }
 
+    //printf("DATA: %ld\n",strlen(message.data));
+    //printf("STR: %ld\n",strlen(str));
+    while(1){
+        msgrcv(msgid,&message,256,4,0);
+        if(strlen(message.data)>=n){break;}
+    }
+
+    printf("%s\n",message.data);
+
+    msgctl(msgid,IPC_RMID,0);
+    wait(NULL);wait(NULL);wait(NULL);
+    //printf("father terminated\n");
+    return 0;
 
 }
