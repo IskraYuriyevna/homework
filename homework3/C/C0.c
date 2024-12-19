@@ -26,7 +26,7 @@ int main(){
         if(arr[i]>arr[imax]){
             imax = i;
         }
-        if(arr[i]<arr[imi n]){
+        if(arr[i]<arr[imin]){
             imin = i;
         }
     }
