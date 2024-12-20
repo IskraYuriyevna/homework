@@ -46,8 +46,7 @@ int main(){
     //由于父进程不需要读取也不需要输入，所以读端和写端都关闭
     close(fd[1]);
     close(fd[0]);
-    //等待子进程和孙进程都结束之后再结束父进程
-    wait(NULL);
+    //So the parent process does not need to wait for its grandchildren, right?
     wait(NULL);
     return 0;
 }
