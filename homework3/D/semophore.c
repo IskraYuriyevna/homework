@@ -10,25 +10,25 @@ int main() {
     pid_t pid;
     int fd[2];
     pipe(fd);
-    int key_t;
+    int key;
     int semid;
     struct sembuf P = {0,-1,0}, V = {0,1,0};
 
-    key  = ftok("a.txt",5); 
+    key = ftok("a.txt",5); 
 
 
 
-    pid = fork() //创建子进程
-    if(pid == -1) {perrof("fork");return 1;}
+    pid = fork(); //创建子进程
+    if(pid == -1) {perror("fork");return 1;}
     if(pid == 0) {
         int num = 8, num2;
         printf("Son's sent num = %d\n",num);
         write(fd[1],&num,sizeof(int));
-        semop(semid,&P,1) // P(s) s = s - 1 = 1 - 1 = 0;
+        semop(semid,&P,1); // P(s) s = s - 1 = 1 - 1 = 0;
         read(fd[0],&num2,sizeof(int));
-        printf("Son's received num2 = %d\n".num2);
-        close(fd[0])//
-        close(fd[1])
+        printf("Son's received num2 = %d\n",num2);
+        close(fd[0]);//
+        close(fd[1]);
     } else {
         int num2,num3 = 6;
         read(fd[0],&num2,sizeof(int));
