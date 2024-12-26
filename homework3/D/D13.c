@@ -19,7 +19,6 @@ int main(int argc,char **argv)
     if(pid == -1){perror("fork");return 3;}
     if(pid == 0)// son
 	{
-        
 		if (dup2(fd[1],1)<0){perror("dup2");return 1;}
         close(fd[0]);close(fd[1]);
 		close(fd2[0]);close(fd2[1]);
