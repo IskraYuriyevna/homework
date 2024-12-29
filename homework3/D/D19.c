@@ -37,6 +37,7 @@ int main(){
         pid2 = fork();
         if(pid2<0){perror("fork");return 1;}
         if(pid2>0){//father
+
             int pctrl = 0;
             write(fd[1],&Cnt,sizeof(cnt));
             semop(semid,&V2,1);
@@ -61,7 +62,9 @@ int main(){
             //wait(NULL);wait(NULL);
             semctl(semid,0,IPC_RMID,0);
             //printf("father terminated\n");
+
         }else{//son2
+        
             while(Cnt.Inc<=Cnt.Dec){
                 semop(semid,&P3,1);
                 read(fd[0],&Cnt,sizeof(cnt));
@@ -74,8 +77,10 @@ int main(){
             }
             //printf("son2 out\n");
             close(fd[0]);close(fd[1]);
+
         }
     }else{//son1
+
         while(Cnt.Inc<=Cnt.Dec){
             semop(semid,&P2,1);
             read(fd[0],&Cnt,sizeof(cnt));
@@ -89,6 +94,7 @@ int main(){
         //printf("son1 out\n");
         close(fd[0]);close(fd[1]);
     }
+
     wait(NULL);wait(NULL);
     return 0;
 }
