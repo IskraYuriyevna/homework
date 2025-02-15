@@ -26,9 +26,9 @@ void func(int* arr,int n){
 }
 
 void func(double* arr,int n){
-    double sum = 0;
+    double sum = 1.0;
     for(int i=0;i<n;i++){
-        sum += arr[i];
+        sum *= arr[i];
     }
     cout << sum << endl;
 }
