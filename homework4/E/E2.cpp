@@ -13,16 +13,17 @@ int left(unsigned long num,int N){
 }
 
 int main(){
-    char str[10],str2[101];int N;
-    cin.getline(str,10);
-    if(strcmp(str,"string")){
-        cin.getline(str2,100);
-        cin >> N;
-        
-    }else if(strcmp(str,"number")){
-        cin.getline(str2,100);
-        cin >> N;
+    string type;char str2[101],ch;int num,N;
+    cin >> type;cin.get(ch);
 
+    if(type=="string"){
+        cin.getline(str2,100);
+        cin >> N;
+        cout << left() << endl;
+    }else if(type=="number"){
+        cin >> num;
+        cin >> N;
+        cout << left(num,N) << endl;
     }
     return 0;
 }

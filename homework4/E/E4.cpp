@@ -48,7 +48,7 @@ class Vector_3d{
 
     double max_norm(){
         double maxn;
-        maxn = max(max(x,y),z);
+        maxn = max(max(abs(x),abs(y)),abs(z));
         return maxn;
     }
     
