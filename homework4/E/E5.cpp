@@ -20,9 +20,13 @@ class Quotient{
             numerator = 0;
             denominator = 1;
         }
-        Quotient(int num,unsigned int den){
+        Quotient(int num,int den){
             if (den == 0){
                 den = 1;
+            }
+            if (den < 0) {
+                num = -num;
+                den = -den;
             }
             int qgcd=gcd(abs(num),den);
             if(qgcd!=1){
@@ -45,12 +49,3 @@ class Quotient{
         unsigned int denominator;
 };
 
-int main()
-{
-       Quotient q1(-5,0), q2(6,12), q3(0), q4;
-       q1.print();
-       q2.print();
-       q3.print();
-       q4.print();
-       return 0;
-}
