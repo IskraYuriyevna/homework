@@ -1,29 +1,52 @@
 #include<iostream>
 #include<cstring>
+#include<cmath>
 using namespace std;
 
-char* left(char* str,int N){
-    if(strlen(str)>N){return 0;};
-    ;
+unsigned long left(unsigned long num, int N) {
+    if (N <= 0) {
+        return 0; 
+    }
+    int len = 0;
+    unsigned long result = num;
+    len = floor(log10(num)+1);
+    if (N >= len) {
+        return num;
+    }
+    for (int i = len - N; i > 0; i--) {
+        num /= 10;
+    }
+    return num;
 }
 
-int left(unsigned long num,int N){
-    
-    ;
+char* left(char* str, int N) {
+    int len = strlen(str);
+    char* result = new char[N+1];
+    if (len == 0 || N <= 0) {
+        return "\0";
+    }
+    if (N >= len) {
+        return str;
+    }
+    for(int i = 0;i<N;i++){result[i]=str[i];}
+    result[N] = '\0';
+    return result;
 }
 
 int main(){
-    string type;char str2[101],ch;int num,N;
+    string type;char str[101],ch;unsigned long num;int N;
     cin >> type;cin.get(ch);
 
     if(type=="string"){
-        cin.getline(str2,100);
+        cin.get(str,100);
         cin >> N;
-        cout << left() << endl;
+        //cout << str << endl;
+        cout << left(str,N) << endl;
     }else if(type=="number"){
         cin >> num;
         cin >> N;
         cout << left(num,N) << endl;
     }
+
     return 0;
 }

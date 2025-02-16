@@ -47,7 +47,7 @@ class Quotient{
 
 int main()
 {
-       Quotient q1(-5,0), q2(6,12), q3(-7), q4;
+       Quotient q1(-5,0), q2(6,12), q3(0), q4;
        q1.print();
        q2.print();
        q3.print();
