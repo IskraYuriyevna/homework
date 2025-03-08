@@ -1,14 +1,18 @@
 #include <iostream>
 using namespace std;
 
-int gcd(int m,int n){
-    while(n!=0){
-        int temp = m%n;
-        m = n;
-        n = temp;
+namespace mymath {
+    int gcd(int m,int n){
+        while(n!=0){
+            int temp = m%n;
+            m = n;
+            n = temp;
+        }
+        return m;
     }
-    return m;
 }
+
+
 
 class Quotient{
     public:
@@ -28,7 +32,7 @@ class Quotient{
                 num = -num;
                 den = -den;
             }
-            int qgcd=gcd(abs(num),den);
+            int qgcd=mymath::gcd(abs(num),den);
             if(qgcd!=1){
                 num = num/qgcd;
                 den = den/qgcd;
@@ -37,7 +41,7 @@ class Quotient{
             denominator = den;
         }
 
-        void print(){
+        void print() const{
             if (denominator==1){
                 cout << numerator << endl;;
             }else{

@@ -20,7 +20,7 @@ class Vector_3d{
         z = 0;
     }
 
-    void print(){
+    void print() const {
         cout << '(' << x << ',' << y << ',' << z << ')' << endl;
     }
     void set(double arg_x,double arg_y, double arg_z){
@@ -29,15 +29,15 @@ class Vector_3d{
         z = arg_z;
     }  
 
-    double get_x(){
+    double get_x() const{
         return x;
     }
 
-    double get_y(){
+    double get_y() const{
         return y;
     }
 
-    double get_z(){
+    double get_z() const{
         return z;
     }    
     double euc_norm() const{
