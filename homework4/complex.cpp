@@ -6,17 +6,28 @@ class Complex
 {
     public:
         Complex(double arg_re,double arg_im){
+            cout << "Create complex number" << endl;
             re = arg_re;
             im = arg_im;
         }
+        
+        //如果加入关键字 explicit 会制止隐式类型转换
+        //explicit 
         Complex(double arg_re){
+            cout << "Create complex from double" << endl;
             re = arg_re;
             im = 0.;
         }
         Complex()
         {
+            cout << "Create zero complex " << endl;
             re = 0.;
             im = 0.;
+        }
+        Complex(const Complex& other){
+            cout << "Create copy " << endl;
+            re = other.re;
+            im = other.im;
         }
         void print()
         {
@@ -31,11 +42,20 @@ class Complex
         }
         double get_re(){return re;}
         double get_im(){return im;}
+        ~Complex(){ cout << "delete complex" << endl;};
 
     private:
         double re;
         double im;
 };
+
+double pow2(Complex* z){
+    return z->get_re()*z->get_re() + z -> get_im() * z -> get_im();
+}
+
+double pow2(Complex& z){
+    return z.get_re()*z.get_re() + z.get_im()*z.get_im();
+}
 
 double pow2(Complex z){
     return z.get_re()*z.get_re() + z.get_im()*z.get_im();
