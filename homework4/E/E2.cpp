@@ -18,7 +18,7 @@ unsigned long left(unsigned long num, int N) {
     }
     return num;
 }
-
+ 
 char* left(char* str, int N) {
     int len = strlen(str);
     char* result = new char[N+1];
