@@ -8,7 +8,7 @@ struct Pers
     double num_double;
 };
 
-void Swap(int a , int b)
+void Swap(int& a , int& b)
 {
     int tmp = a;
     a = b;
@@ -28,7 +28,7 @@ void Swap(T& a, T& b)
     T tmp = a;
     a = b;
     b = tmp;
-    cout << "Type T" << endl;
+    //cout << "Type T" << endl;
 };
 
 template<>
@@ -58,5 +58,5 @@ void Swap(Type* arr1,Type* arr2, int n)
         arr1[i] = arr2[i];
         arr2[i] = tmp;
     }
-    cout << "Type* " <<endl;
+    //cout << "Type* " <<endl;
 }
