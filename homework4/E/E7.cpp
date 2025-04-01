@@ -9,8 +9,7 @@ class Vec{
 
     public:
         Vec(int length,double* vecptr){
-            v = new double [len];
-            
+            v = new double [len];   
         }
         Vec(int length){
 
