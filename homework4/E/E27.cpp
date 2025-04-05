@@ -1,11 +1,11 @@
 #include<iostream>
 using namespace std;
 
-template<class T>
+template<class T>//模板定义泛型类 
 class Vector_2d
 {
     public:
-        Vector_2d(T x = 0,T y = 0): x_(x),y_(y){}
+        Vector_2d(T x = 0,T y = 0): x_(x),y_(y){}//初始化成员向量
         void print() const;
         T max_norm() const {return abs(x_)>abs(y_)?abs(x_):abs(y_);}
         const Vector_2d<T>& operator = (const Vector_2d<T>& op);
@@ -15,6 +15,7 @@ class Vector_2d
         }
         template<typename V>
         friend Vector_2d<V> operator+(const Vector_2d<V>& op1,const Vector_2d<V>& op2);
+        //模板友元函数
     private:
         T x_,y_;
 };
@@ -30,6 +31,7 @@ Vector_2d<T> operator+(const Vector_2d<T>& op1,const Vector_2d<T>& op2)
 
 template<typename T>
 const Vector_2d<T>& Vector_2d<T>::operator=(const Vector_2d<T>& op)
+//赋值运算符重载，返回引用支持连续赋值
 {
     x_ = op.x_;
     y_ = op.y_;
