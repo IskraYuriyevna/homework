@@ -20,15 +20,14 @@ unsigned long left(unsigned long num, int N) {
 }
 
 char* left(char* str, int N) {
+    static char result[101] = {0};
     int len = strlen(str);
-    char* result = new char[N+1];
     if (len == 0 || N <= 0) {
         result[0] = '\0';
         return result;
     }
     if (N >= len) {
-        result = str;
-        return result;
+        return str;
     }
     for(int i = 0;i<N;i++){result[i]=str[i];}
     result[N] = '\0';
@@ -46,7 +45,6 @@ int main(){
         char* result = left(str,N);
         if(result){
             cout << result << endl;
-            delete[] result;
         }
     }else if(type=="number"){
         cin >> num;
