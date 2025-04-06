@@ -31,7 +31,7 @@ Vector_2d<T> operator+(const Vector_2d<T>& op1,const Vector_2d<T>& op2)
 
 template<typename T>
 const Vector_2d<T>& Vector_2d<T>::operator=(const Vector_2d<T>& op)
-//赋值运算符重载，返回引用支持连续赋值
+//赋值运算符重载
 {
     x_ = op.x_;
     y_ = op.y_;
@@ -42,4 +42,6 @@ template <typename D>
 void Vector_2d<D>::print() const
 {
     cout << "(" << x_ << "," <<y_ << ")" << endl;
+    //另外，即使是const成员函数也可以修改mutable变量，但mutable只能用于类成员
+    //注意const函数和返回const变量的函数的区别，一个是不改变*this的变量，一个是返回不可改变的变量
 }
