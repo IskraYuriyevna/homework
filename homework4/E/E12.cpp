@@ -48,6 +48,10 @@ int count_symbols(const char* filename)
     ifstream fin(filename);
     if(!fin.is_open()){//如果文件无法打开，抛出异常
         throw FileException(filename,"Can't open file");
+        //throw其实可以抛出任何类型，例如基本类型，指针，引用等
+        //但是异常对象需要被拷贝或移动构造初始化到异常存储区，禁止拷贝的对象无法抛出
+        //抛出局部变量的指针会被销毁，导致展开时变成悬空指针，危险！
+        //如果栈展开过程中，入析构函数中再次抛出异常，程序会直接终止，因此析构函数应保证不抛出异常。
         return -1;
     }
     int count = 0;

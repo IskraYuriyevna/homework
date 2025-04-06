@@ -4,7 +4,8 @@ using namespace std;
 
 class mstring{
     private:
-
+        char* string_;
+        int length_;
     public:
     mstring(){
 
@@ -12,43 +13,25 @@ class mstring{
     mstring(){
 
     }
-    mstring(){
+    mstring(const char* str){
 
     }
     ~mstring(){
 
     }
 
-    length(){
 
-    }
-    ismpty(){
+    int length();
+    bool isempty();
+    void add(char c);
+    void add(const char* c);
+    void insert(char c,int i);
+    void insert(const char* c,int i);
+    void del(int i);
+    void del(int i, int j);
+    int search(const char* str);
+    void print();
 
-    }
-    add(){
-
-    }
-    add(){
-
-    }
-    insert(){
-
-    }
-    insert(){
-
-    }
-    del(){
-        
-    }
-    del(){
-
-    }
-    search(){
-
-    }
-    print(){
-
-    }
 };
 
 int main(){

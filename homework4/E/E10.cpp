@@ -32,6 +32,13 @@ class Complex
         double get_re(){return re;}
         double get_im(){return im;}
 
+        Complex operator+(Complex&)const{}
+        Complex operator-(Complex& cmpl)const{}
+        Complex operator-(double i){}
+        Complex operator*(){}
+        friend Complex operator+(double i,Complex& cmpl){}
+
+
     private:
         double re;
         double im;
