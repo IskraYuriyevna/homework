@@ -1,16 +1,18 @@
 #include <iostream>
+#include <string>
 using namespace std;
 char c;
-enum {H,N,P,S};
+enum {H,A,B,S};
+string str;
      
 void gc() 
 {
 	c = cin.get();
 }
 
-double Parser()
+string Parser()
 {
-	double num = 0. , dec = 0.1; 
+	
 	int CS = H; 
 	gc();
 	do{ 
@@ -18,58 +20,59 @@ double Parser()
 		{
 			case H:
 			{
-				if(c == '0'|| c == '1') 
+				if(c == 'a') 
 				{
-					num = c - '0';
+                    str += c;
 					gc();
-					CS = N;
+					CS = A;
 				}
 				else throw c;
 				break;
 			}
-			case N:
+			case A:
 			{
-				if(c=='0'||c=='1') 
+				if(c=='d') 
 				{
-					num = num*10+c -'0';
+                    str += c;
 					gc();
-					CS = N;
+					CS = A;
 				}
-				else if(c == '.') 
+				else if(c == 'a') 
 				{
+                    str += c;
 					gc();
-					CS = P;
+					CS = B;
 				}
 				else throw c;
 				break;
 			}
-			case P:
+			case B:
 			{
-				if(c=='0'||c=='1') 
+				if(c=='a') 
 				{
-					num += dec*(c-'0');
+                    str += c;
 					gc();
-					CS = S;
+					CS = A;
 				}
+                else if(c =='\n')
+                {
+                    return str;
+                    // str += c;
+                    // gc();
+                    // CS = S;
+                }
 				else throw c;
 				break;
 			}
-			case S:
-			{
-				if(c=='0'||c=='1') 
-				{
-					dec *= 0.1;
-					num += dec*(c-'0');
-					gc();
-					CS = S;
-				}
-				else if(c=='\n') 
-				{
-					return num;
-				}
-				else throw c;
-				break;
-			}
+			// case S:
+			// {
+			// 	if(c=='\n') 
+			// 	{
+			// 		return str;
+			// 	}
+			// 	else throw c;
+			// 	break;
+			// }
 			default:
 				break;
 		}
@@ -78,10 +81,9 @@ double Parser()
 
 int main()
 {
-	double num = 0.;
 	try{
-		num = Parser();
-		cout << fixed << num << endl; 
+		string stro = Parser();
+		cout << stro << endl; 
 	}
 	catch(char c)
 	{
