@@ -12,22 +12,32 @@ void A();
 void B();
 
 void S(){
-    cout << "S -> AB" << endl;
-    A();
-    B();
+    if(c == 'a')
+    {
+        //cout << "S -> aAB" << endl;
+        gc();
+        A();
+        B();
+    }
+    else if(c == 'b')
+    {
+        //cout << "S -> bB" << endl;
+        gc();
+        B();
+    }
     if (c != '\n')
         throw c;
 }
 
 void A(){
     if(c == 'a'){
-        cout << "A -> a" << endl;
-        gc();
-    }
-    else if(c == 'c'){
-        cout << "A -> cA" << endl;
+        //cout << "A -> aA" << endl;
         gc();
         A();
+    }
+    else if(c == 'b'){
+        //cout << "A -> b" << endl;
+        gc();
     }
     else throw c;
 }
@@ -35,9 +45,13 @@ void A(){
 void B(){
     if(c == 'b')
     {
-        cout << "B -> bA" << endl;
+        //cout << "B -> bB" << endl;
         gc();
-        A();
+        B();
+    }
+    else if(c == '\n')
+    {
+        ;//cout << "B -> ε" << endl;
     }
     else throw c;
 }
@@ -46,10 +60,10 @@ int main(){
     try{
         gc();
         S();
-        cout << "Success" << endl;
+        cout << "YES" << endl;
     }
     catch(char c){
-        cerr << "Error in: " << c << endl;
+        cout << "NO" << endl;
     }
     return 0;
 }
