@@ -53,8 +53,7 @@ string Parser()
                     str += c;
 					gc();
 					CS = A;
-				}
-                else if(c =='\n')
+				}else if(c =='\n')
                 {
                     return str;
                     // str += c;
