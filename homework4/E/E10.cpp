@@ -32,12 +32,11 @@ class Complex
         double get_re(){return re;}
         double get_im(){return im;}
 
-        Complex operator+(Complex&)const{}
-        Complex operator-(Complex& cmpl)const{}
-        Complex operator-(double i){}
-        Complex operator*(){}
-        friend Complex operator+(double i,Complex& cmpl){}
-
+        Complex operator+(Complex&)const;
+        Complex operator-(Complex& cmpl)const;
+        Complex operator-(double i);
+        Complex operator*();
+        friend Complex operator+(double i,Complex& cmpl);
 
     private:
         double re;
@@ -47,3 +46,5 @@ class Complex
 double pow2(Complex z){
     return z.get_re()*z.get_re() + z.get_im()*z.get_im();
 }
+
+
