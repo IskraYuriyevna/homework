@@ -24,6 +24,3 @@ CMAIN:
 .end:
     PRINT_DEC 4,ecx
     ret
-    
-    
-    
