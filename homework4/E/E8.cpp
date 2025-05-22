@@ -1,28 +1,36 @@
 #include<iostream>
 #include<cstring>
+#include <stdexcept>
 using namespace std;
 
 class mstring{
     private:
         char* string_;
         int length_;
-    public:
-    mstring(){
 
-    }
-    mstring(){
-
+    public:    
+	mstring(){
+		string_ = new char[1];
+		string_[0]='\0';
+		length_ = 0;
     }
     mstring(const char* str){
-
+		string_ = new char[strlen(str)+1];
+		strcpy(string_,str);
+		length_ = strlen(str);
     }
+    mstring(const mstring& ob){
+		string_ = new char[strlen(ob.string_)+1];
+		strcpy(string_,ob.string_);
+		length_ = ob.length_;
+    }
+
     ~mstring(){
-
+		delete[] string_;
     }
 
-
-    int length();
-    bool isempty();
+    int length(){return length_;};
+    bool isempty(){if (length_){return false;}else{return true;}};
     void add(char c);
     void add(const char* c);
     void insert(char c,int i);
@@ -31,58 +39,36 @@ class mstring{
     void del(int i, int j);
     int search(const char* str);
     void print();
-
 };
 
+void mstring::add(char c){
 
+}
 
+void mstring::add(const char*c){
 
-class Vec {
-	private:
-					double *v;
-					int len;
-	public:
-                    //只能显示调用,不能隐式转换
-                    explicit Vec(int l,double *v_ptr =nullptr);
-                    //Vec a = 5; error add explicit
-                    //Vec a(5); ok
-					Vec(const Vec & ob);
-					~Vec();
-					void set(double arg,int coord);
-					double get(int coord) const;
-					double euc_norm() const;
-					double max_norm() const;
-					void print() const;
-};
-Vec::Vec(int l,double *v_ptr){
-	v = new double[l];
-	for(int i = 0;i<l;i++) v[i] = (v_ptr!=nullptr ? v_ptr[i] : 0.0);
-	len = l;
 }
-Vec::Vec(const Vec & ob){
-	v = new double[ob.len];
-	for(int i=0;i<ob.len;i++) v[i] = (ob.v!=nullptr ? ob.v[i] : 0.0);
-	len = ob.len;
+
+void mstring::insert(char c,int i){
+
 }
-Vec::~Vec(){
-	if(v!=nullptr){ delete [] v; v = nullptr;}
+
+void mstring::insert(const char* c,int i){
+
 }
-void Vec::set(double arg,int coord){
-	if(coord>=0 && coord <len) v[coord] = arg;
+
+void mstring::del(int i){
+
 }
-double Vec::get(int coord) const{
-	if(coord>=0 && coord<len) return v[coord]; return 0.0;
+
+void mstring::del(int i,int j){
+
 }
-double Vec::euc_norm() const{
-	double sum = 0.0;
-	for(int i=0;i<len;i++) sum+=(v[i]*v[i]); return sqrt(sum);
+
+int search(const char* str){
+	return 0;
 }
-double Vec::max_norm() const{
-	double max = fabs(v[0]);
-	for(int i=1;i<len;i++) if(max<fabs(v[i])) max=fabs(v[i]); return max;
-}
-void Vec::print() const{
-		cout << "(";
-		for(int i = 0;i<len;i++){ if(i) cout << ","; cout << v[i]; }
-		cout << ")" << endl;
+
+void mstring::print(){
+	
 }
