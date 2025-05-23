@@ -72,7 +72,7 @@ class N : public Figure{ //Knight
 
 bool N::move() const {
     if(!bound()){return false;}
-    if(abs(y1_-y2_)==2 && (x1_==x2_)==1) {
+    if(abs(y1_-y2_)==2 && abs(x1_-x2_)==1) {
         return true;
     }else if(abs(x1_-x2_)==2 && abs(y1_-y2_)==1) {
         return true;
