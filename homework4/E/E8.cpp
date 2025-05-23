@@ -41,7 +41,7 @@ public:
 };
 
 void mstring::add(char c){
-
+        
 }
 
 void mstring::add(const char*c){
