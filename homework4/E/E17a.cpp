@@ -24,6 +24,8 @@ char * event::strdup(const char * info) const{
 void event::change_date(int new_year, int new_month, int new_day){
     y_=new_year; m_=new_month; d_=new_day;
 }
+
+
 class test : public event{
 private:
     bool grade_;
@@ -40,6 +42,7 @@ void test::print_res() const {
     if (grade_) cout << " true" << endl;
     else cout << " false" << endl;
 }
+
 class exam : public event{
 private:
     int grade_;

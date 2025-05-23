@@ -1,44 +1,43 @@
 #include<iostream>
 #include<cstring>
-#include <stdexcept>
 using namespace std;
 
 class mstring{
-    private:
+private:
         char* string_;
         int length_;
-
-    public:    
+public:   
+           
 	mstring(){
 		string_ = new char[1];
 		string_[0]='\0';
 		length_ = 0;
-    }
-    mstring(const char* str){
+        }
+        mstring(const char* str){
 		string_ = new char[strlen(str)+1];
 		strcpy(string_,str);
 		length_ = strlen(str);
-    }
-    mstring(const mstring& ob){
+        }
+        mstring(const mstring& ob){
 		string_ = new char[strlen(ob.string_)+1];
 		strcpy(string_,ob.string_);
 		length_ = ob.length_;
-    }
+        }
 
-    ~mstring(){
-		delete[] string_;
-    }
+        ~mstring(){
+                delete[] string_;
+        }
 
-    int length(){return length_;};
-    bool isempty(){if (length_){return false;}else{return true;}};
-    void add(char c);
-    void add(const char* c);
-    void insert(char c,int i);
-    void insert(const char* c,int i);
-    void del(int i);
-    void del(int i, int j);
-    int search(const char* str);
-    void print();
+        int length(){return length_;};
+        bool isempty(){if (length_){return false;}else{return true;}};
+        void add(char c);
+        void add(const char* c);
+        void insert(char c,int i);
+        void insert(const char* c,int i);
+        void del(int i);
+        void del(int i, int j);
+        int search(const char* str);
+        void print();
 };
 
 void mstring::add(char c){
@@ -66,7 +65,7 @@ void mstring::del(int i,int j){
 }
 
 int search(const char* str){
-	return 0;
+        return 0;
 }
 
 void mstring::print(){
