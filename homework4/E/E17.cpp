@@ -33,6 +33,7 @@ class test : public event{
         bool pass_;
     public:
         explicit test(const char* event_,int y,int m,int d,bool grade):event(event_,y,m,d),pass_(grade){}
+        explicit test(const char* event_,int y,int m,int d,int grade):event(event_,y,m,d){if(grade>=3){pass_=true;}else{pass_=false;}}
         test(const test& src):event(src),pass_(src.pass_){}
         void print_res()const;
         void change_grade(bool grade){pass_ = grade;};
