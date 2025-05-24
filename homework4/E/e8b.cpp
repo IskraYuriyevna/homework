@@ -113,3 +113,4 @@ public:
         if (found == nullptr) return -1;
         return found - string_;
     }
+};

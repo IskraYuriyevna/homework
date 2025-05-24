@@ -41,33 +41,82 @@ public:
 };
 
 void mstring::add(char c){
-        
+        char* tmp = new char[length_+2];
+        strcpy(tmp,string_);
+        tmp[length_]=c;
+        tmp[length_+1]='\0';
+        delete[] string_;
+        string_ = tmp;
+        length_++;
 }
 
-void mstring::add(const char*c){
-
+void mstring::add(const char* c){
+        if(c != nullptr){
+                int nlen = strlen(c);
+                char* tmp = new char[length_+nlen+1];
+                strcpy(tmp,string_);
+                strcat(tmp,c);
+                delete[] string_;
+                string_ = tmp;
+                length_ += nlen;
+        }
 }
 
 void mstring::insert(char c,int i){
+        if(i<0||i>length_) return;
 
+        char* tmp = new char[length_+1]; 
+        strncpy(tmp,string_,i);
+        tmp[i] = c;
+        strcpy(tmp+i+1, string_+i);
+        delete [] string_;
+        string_ = tmp;
+        length_++;
 }
 
 void mstring::insert(const char* c,int i){
+        if(c==nullptr|| i<0 || i>length_) return;
 
+        int nlen = strlen(c);
+        char* tmp = new char[length_+nlen+1];
+        strncpy(tmp,string_,i);
+        strcpy(tmp+i,c);
+        strcpy(tmp+i+nlen,string_+i);
+        delete[] string_;
+        string_ = tmp;
+        length_ += nlen;
 }
 
 void mstring::del(int i){
+        if(i<0 || i>= length_) return;
 
+        char* tmp = new char[length_];
+        strncpy(tmp,string_,i);
+        strcpy(tmp+i,string_+i+1);
+        delete[] string_;
+        string_ = tmp;
+        length_ --;
 }
 
 void mstring::del(int i,int j){
+        if(i<0 || j>= length_ || i>j) return;
 
+        char* tmp = new char[length_-(j-i+1)+1];
+        strncpy(tmp,string_,i);
+        strcpy(tmp+i,string_+j+1);
+        delete[] string_;
+        string_ = tmp;
+        length_ -= j-i+1;
 }
 
-int search(const char* str){
-        return 0;
+int mstring::search(const char* str){
+        if(str==nullptr){return -1;}
+        const char* res = strstr(string_,str);
+        if(res == nullptr){return -1;}
+        return res - string_;
 }
 
 void mstring::print(){
-	
+	cout << string_ <<endl;
 }
+
