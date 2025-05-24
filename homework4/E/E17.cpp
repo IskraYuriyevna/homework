@@ -8,11 +8,11 @@ class event{
         int y_,m_,d_;
     public:
         explicit event(const char* eve,int y,int m,int d):y_(y),m_(m),d_(d){
-            char* event_= new char[strlen(eve)+1];
+            event_= new char[strlen(eve)+1];
             strcpy(event_,eve);
         }
         event(const event& src):y_(src.y_),m_(src.m_),d_(src.d_){
-            char* event_= new char[strlen(src.event_)+1];
+            event_= new char[strlen(src.event_)+1];
             strcpy(event_,src.event_);
         }
         virtual ~event(){
@@ -21,8 +21,8 @@ class event{
         virtual void print_res()const{
             cout<< event_ << " " << y_ << " " << m_ << " " << d_; 
         }
-        void change_date(int ny,int nm,int nd){y_ = ny;m_ = nm,d_ = nd;};
-        virtual void change_grade(bool grade)=0;
+        void change_date(int ny,int nm,int nd){y_ = ny;m_ = nm;d_ = nd;};
+        virtual void change_grade(bool grade){};
         virtual void change_grade(int grade)=0;
         char* getevent()const{return event_;};
 };
@@ -33,12 +33,11 @@ class test : public event{
         bool pass_;
     public:
         explicit test(const char* event_,int y,int m,int d,bool grade):event(event_,y,m,d),pass_(grade){}
-        test(const test& src):event(src),pass_(src.pass_){
-            char* event_= new char[strlen(src.getevent())+1];
-            strcpy(event_,src.getevent());
-        }
+        explicit test(const char* event_,int y,int m,int d,int grade):event(event_,y,m,d){if(grade>=3){pass_=true;}else{pass_=false;}}
+        test(const test& src):event(src),pass_(src.pass_){}
         void print_res()const;
         void change_grade(bool grade){pass_ = grade;};
+        void change_grade(int grade){if(grade>=3){pass_ = true;}else{pass_ = false;}}
 };
 
 void test::print_res()const{
@@ -63,4 +62,3 @@ class exam : public event{
         };
         void change_grade(int grade){grade_ = grade;}
 };
-
