@@ -9,8 +9,9 @@ class Parser
         void A();
         void B();
         void S();
-    public:
         void gc(){c=cin.get();}
+    public:
+        
         bool analyze();
 };
 

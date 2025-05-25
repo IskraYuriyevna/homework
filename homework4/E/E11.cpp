@@ -18,6 +18,8 @@ class Vec{
         double max_norm() const;
         void print() const;
 
+        
+
 };
 
 Vec::Vec(int length,double* vecptr){
