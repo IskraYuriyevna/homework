@@ -5,11 +5,15 @@ using namespace std;
 
 class Exception{
     private:
-        string comment_;
+        string comment_;int errno1_,errno2_;
     public:
         Exception(const char* comment=""):comment_(comment){};
+        Exception(const char* comment,int err1):comment_(comment),errno1_(err1){};
+        Exception(const char* comment,int err1,int err2):comment_(comment),errno1_(err1),errno2_(err2){};
         ~Exception(){}
         string GetComment()const{return comment_;}
+        const int& GetErrno1()const{ return errno1_;}
+        const int& GetErrno2()const{return errno2_;}
 };
 
 class Vec{
@@ -38,7 +42,9 @@ class Vec{
         friend ostream& operator<<(ostream& os , const Vec& op);
 };
 
+
 Vec Vec::operator+(const Vec& op)const{
+    if(len != op.len){throw Exception("addition of vectors of different lengths: ",len, op.len);}
     Vec tmp(len);
     for(int i=0;i<len;i++){
         tmp.v[i] = v[i]+op.v[i];
@@ -47,6 +53,7 @@ Vec Vec::operator+(const Vec& op)const{
 }
 
 Vec Vec::operator-(const Vec& op)const{
+    if(len != op.len){throw Exception("subtraction of vectors of different lengths: ",len, op.len);}
     Vec tmp(len);
     for(int i=0;i<len;i++){
         tmp.v[i] = v[i]-op.v[i];
@@ -73,8 +80,9 @@ Vec operator*(double a,const Vec& op){
 const Vec& Vec::operator=(const Vec& op){
     if(this==&op) return *this;
     delete[] v;
-    v = new double[op.len];
-    for(int i=0;i<op.len;i++){
+    len = op.len;
+    v = new double[len];
+    for(int i=0;i<len;i++){
         v[i]=op.v[i];
     }
     return *this;
@@ -92,6 +100,7 @@ bool Vec::operator==(const Vec &op)const{
 }
 
 double & Vec::operator[](int index){
+    if(index < 0 || index >= len){throw Exception("incorrect indexing: ", index);}
     return v[index];
 }
 
@@ -165,23 +174,35 @@ void Vec::print() const {
     cout << ")"<<endl;
 }
 
+// void error()
+// {
+//      Vec v1(3), v2(5), v3(4);
+
+//       v3 = v1+v2;
+// }
+
+// void error()
+// {
+//     Vec v(5);
+//     double a = v[7];
+// }
+
 int main()
 {
-        double y1[4] = {1,2,3,4};
-        double y2[4] = {-2,1,3,-3};
-
-        Vec u(4, y1), v(4, y2);
-        Vec w(4);
-
-        cout << "u = " << u << endl;
-        cout << "v = " << v << endl;
-        w = u = u;
-        cout << "w = u = " << w << endl;
-        w = 4.*u + v*3;
-        cout << "w = 4.*u + v*3 = " << w << endl;
-        w[2] = 3;
-        w[0] = -1;
-        cout << "w = " << w << endl;
-
-        return 0;
-}
+    try
+    {
+        error();
+    }catch(const Exception& ex){
+        string type = ex.GetComment();
+        if(type == "addition of vectors of different lengths: "){
+            cerr << "Exception: " << type << ex.GetErrno1() << " " << ex.GetErrno2() << endl;
+        }else if(type == "subtraction of vectors of different lengths: "){
+            cerr << "Exception: " << type << ex.GetErrno1() << " " << ex.GetErrno2() << endl;
+        }else if(type == "incorrect indexing: "){
+            cerr << "Exception: " << type << ex.GetErrno1() << endl;
+        }
+    }catch(...) { 
+        cerr << "Exception: unknown error" << endl;
+    }
+    return 0;
+} 
