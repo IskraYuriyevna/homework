@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include <vector>
 using namespace std;
 
 class Exception{
@@ -14,23 +15,38 @@ class Exception{
 
 class WrongNumber : public Exception{
     private:
+        string team_;
         int errno_;
     public:
-        WrongNumber(const char* comment):comment_(comment){}
+        WrongNumber(const char* comment,string team,int no=0):Exception(comment),team_(team),errno_(no){}
+        WrongNumber(const WrongNumber& other):Exception(other),team_(other.team_),errno_(other.errno_){};
+        string GetTeam(){return team_;}
+        int GetErrno(){return errno_;}
+};
 
+class WrongName: public Exception{
+    private:
+        string team_;
+    public:
+        WrongName(const char* comment,string team):Exception(comment),team_(team){}
+        WrongName(const WrongName& other):Exception(other),team_(other.team_){};
+        string GetTeam(){return team_;}
 };
 
 class Player{
     private:
         string team_;
         int number_;
-        static int players_[12];
+        static vector<string> team;
     public:
         Player();
         ~Player();
+        string team_;
         void Print();
         void Print_teams();
 };
+
+
 
 
 int main()
