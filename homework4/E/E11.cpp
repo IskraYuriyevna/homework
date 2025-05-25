@@ -1,5 +1,6 @@
 #include<iostream>
 #include<cmath>
+#include <ostream>
 using namespace std;
 
 class Vec{
@@ -8,7 +9,7 @@ class Vec{
         int len;
 
     public:
-        Vec(int length,double *vecptr);
+        Vec(int length,double *vecptr); 
         Vec(int length);
         Vec(const Vec & ob);
         ~Vec();
@@ -18,9 +19,84 @@ class Vec{
         double max_norm() const;
         void print() const;
 
-        
-
+        Vec operator+(const Vec& op)const;
+        Vec operator-(const Vec& op)const;
+        Vec operator*(double a)const;
+        friend Vec operator*(double a,const Vec& op);
+        const Vec& operator=(const Vec& op);
+        bool operator==(const Vec &op)const;
+        double & operator[](int index); 
+        friend ostream& operator<<(ostream& os , const Vec& op);
 };
+
+Vec Vec::operator+(const Vec& op)const{
+    Vec tmp(len);
+    for(int i=0;i<len;i++){
+        tmp.v[i] = v[i]+op.v[i];
+    }
+    return tmp;
+}
+
+Vec Vec::operator-(const Vec& op)const{
+    Vec tmp(len);
+    for(int i=0;i<len;i++){
+        tmp.v[i] = v[i]-op.v[i];
+    }
+    return tmp;
+}
+
+Vec Vec::operator*(double a)const{
+    Vec tmp(len);
+    for(int i=0;i<len;i++){
+        tmp.v[i] = v[i]*a;
+    }
+    return tmp;
+}
+
+Vec operator*(double a,const Vec& op){
+    Vec tmp(op.len);
+    for(int i=0;i<op.len;i++){
+        tmp.v[i] = op.v[i]*a;
+    }
+    return tmp;
+}
+
+const Vec& Vec::operator=(const Vec& op){
+    if(this==&op) return *this;
+    delete[] v;
+    len = op.len;
+    v = new double[len];
+    for(int i=0;i<len;i++){
+        v[i]=op.v[i];
+    }
+    return *this;
+}
+
+bool Vec::operator==(const Vec &op)const{
+    if(len!=op.len){
+        return false;
+    }else{
+        for(int i=0;i<len;i++){
+            if(v[i]!=op.v[i]){return false;}
+        }
+    }
+    return true;
+}
+
+double & Vec::operator[](int index){
+    return v[index];
+}
+
+ostream& operator<<(ostream& os , const Vec& op){
+    os << "(";
+    for(int i=0;i<op.len;i++){
+        if(i){os<< ",";}
+        os << op.v[i];
+    }
+    os << ")";
+    return os;
+}
+
 
 Vec::Vec(int length,double* vecptr){
     v = new double[length];   
@@ -80,3 +156,4 @@ void Vec::print() const {
     }
     cout << ")"<<endl;
 }
+
