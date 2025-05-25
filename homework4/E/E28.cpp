@@ -40,7 +40,7 @@ class Vec{
         template <typename U>
         friend Vec<U> operator*(U a,const Vec<U>& op);
         const Vec<T>& operator=(const Vec<T>& op);
-        Vec<T> operator+=(const Vec<T>& op)const;
+        Vec<T>& operator+=(const Vec<T>& op);
         bool operator==(const Vec<T> &op)const;
         T & operator[](int index); 
         template <typename U>
@@ -108,7 +108,7 @@ const Vec<T>& Vec<T>::operator=(const Vec<T>& op){
 }
 
 template <class T>
-Vec<T> Vec<T>::operator+=(const Vec<T>& op)const{
+Vec<T>& Vec<T>::operator+=(const Vec<T>& op){
     if(len != op.len){throw Exception("addition of vectors of different lengths: ",len, op.len);}
     for(int i=0;i<len;i++){
         v[i] = v[i]+op.v[i];

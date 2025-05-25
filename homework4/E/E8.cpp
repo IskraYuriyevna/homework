@@ -8,37 +8,43 @@ private:
         int length_;
 public:   
            
-	mstring(){
-		string_ = new char[1];
-		string_[0]='\0';
-		length_ = 0;
-        }
-        mstring(const char* str){
-		string_ = new char[strlen(str)+1];
-		strcpy(string_,str);
-		length_ = strlen(str);
-        }
-        mstring(const mstring& ob){
-		string_ = new char[strlen(ob.string_)+1];
-		strcpy(string_,ob.string_);
-		length_ = ob.length_;
-        }
+	mstring();
 
-        ~mstring(){
-                delete[] string_;
-        }
+        mstring(const char* str);
+        
+        mstring(const mstring& ob);
 
-        int length(){return length_;};
-        bool isempty(){if (length_){return false;}else{return true;}};
+        ~mstring(){delete[] string_;}
+
+        int length()const{return length_;};
+        bool isempty()const{if (length_){return false;}else{return true;}};
         void add(char c);
         void add(const char* c);
         void insert(char c,int i);
         void insert(const char* c,int i);
         void del(int i);
         void del(int i, int j);
-        int search(const char* str);
-        void print();
+        int search(const char* str)const;
+        void print()const;
 };
+
+mstring::mstring(){
+   string_ = new char[1];
+        string_[0]='\0';
+        length_ = 0;
+}
+
+mstring::mstring(const char* str){
+        string_ = new char[strlen(str)+1];
+        strcpy(string_,str);
+        length_ = strlen(str);
+}
+
+mstring::mstring(const mstring& ob){
+        string_ = new char[strlen(ob.string_)+1];
+        strcpy(string_,ob.string_);
+        length_ = ob.length_;
+}
 
 void mstring::add(char c){
         char* tmp = new char[length_+2];
@@ -101,7 +107,7 @@ void mstring::del(int i){
 void mstring::del(int i,int j){
         if(i<0 || j>= length_ || i>j) return;
 
-        char* tmp = new char[length_-(j-i+1)+1];
+        char* tmp = new char[length_-(j-i+1)];
         strncpy(tmp,string_,i);
         strcpy(tmp+i,string_+j+1);
         delete[] string_;
@@ -109,14 +115,14 @@ void mstring::del(int i,int j){
         length_ -= j-i+1;
 }
 
-int mstring::search(const char* str){
+int mstring::search(const char* str)const{
         if(str==nullptr){return -1;}
         const char* res = strstr(string_,str);
         if(res == nullptr){return -1;}
         return res - string_;
 }
 
-void mstring::print(){
+void mstring::print()const{
 	cout << string_ <<endl;
 }
 
