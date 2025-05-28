@@ -11,9 +11,9 @@ class IncorrectArgs{
         IncorrectArgs(const string& func,int arg1,int arg2=0):comment_(func),arg1_(arg1),arg2_(arg2){}
         IncorrectArgs(const IncorrectArgs& other):comment_(other.comment_),arg1_(other.arg1_),arg2_(other.arg2_){}
         ~IncorrectArgs(){}
-        string GetComment(){return comment_;}
-        int GetArg1(){return arg1_;}
-        int GetArg2(){return arg2_;}
+        string GetComment()const{return comment_;}
+        int GetArg1()const{return arg1_;}
+        int GetArg2()const{return arg2_;}
 };
 
 class mstring{

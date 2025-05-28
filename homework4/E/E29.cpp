@@ -32,13 +32,34 @@ Set<T>::Set(const Set& other):set_(new T[other.size_]),size_(other.size_){
     }
 }
 
+// template<class T>
+// Set<T>::Set(T* arr,int size){
+//     set_ = nullptr;
+//     for(int i=0;i<size;i++){
+//         add[i];
+//     }
+// }
+
+// template<class T>
+// Set<T>::Set(T* arr,int size){
+//     set_ = new T[size];
+//     for(int i=0;i<size;i++){
+//         set_[i] = arr[i];
+//     }
+//     size_ = size;
+// }
+
 template<class T>
-Set<T>::Set(T* arr,int size){
-    set_ = new T[size];
-    for(int i=0;i<size;i++){
-        set_[i] = arr[i];
+Set<T>::Set(T* arr, int size) {
+    set_ = new T[size];   
+    size_ = 0;
+
+    for (int i=0;i<size;i++) {
+        if (!in(arr[i])) {  
+            set_[size_] = arr[i];
+            size_++;
+        }
     }
-    size_ = size;
 }
 
 template<class T>
@@ -163,4 +184,3 @@ Set<T>& Set<T>::operator=(const Set& other) {
     }
     return *this;
 }
-
