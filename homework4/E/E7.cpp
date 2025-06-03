@@ -9,7 +9,7 @@ class Vec{
 
     public:
         Vec(int length,double *vecptr);
-        Vec(int length);
+        explicit Vec(int length);
         Vec(const Vec & ob);
         ~Vec();
         void set(double arg,int coord);
@@ -78,3 +78,4 @@ void Vec::print() const {
     }
     cout << ")"<<endl;
 }
+
