@@ -1,0 +1,10 @@
+\\Mac\Home\Desktop\homework\homework5\Spider\bin\Debug\Spider.exe.config
+\\Mac\Home\Desktop\homework\homework5\Spider\bin\Debug\Spider.exe
+\\Mac\Home\Desktop\homework\homework5\Spider\bin\Debug\Spider.pdb
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.Form1.resources
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.Properties.Resources.resources
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.exe
+\\Mac\Home\Desktop\homework\homework5\Spider\obj\Debug\Spider.pdb

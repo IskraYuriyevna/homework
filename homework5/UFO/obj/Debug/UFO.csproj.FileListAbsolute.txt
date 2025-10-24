@@ -1,0 +1,10 @@
+\\Mac\Home\Desktop\homework\homework5\UFO\bin\Debug\UFO.exe.config
+\\Mac\Home\Desktop\homework\homework5\UFO\bin\Debug\UFO.exe
+\\Mac\Home\Desktop\homework\homework5\UFO\bin\Debug\UFO.pdb
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.Form1.resources
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.Properties.Resources.resources
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.exe
+\\Mac\Home\Desktop\homework\homework5\UFO\obj\Debug\UFO.pdb

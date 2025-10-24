@@ -1,0 +1,10 @@
+\\Mac\Home\Desktop\homework\homework5\Calc\bin\Debug\Calc.exe.config
+\\Mac\Home\Desktop\homework\homework5\Calc\bin\Debug\Calc.exe
+\\Mac\Home\Desktop\homework\homework5\Calc\bin\Debug\Calc.pdb
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.csproj.AssemblyReference.cache
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.Calculator.resources
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.Properties.Resources.resources
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.csproj.GenerateResource.cache
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.csproj.CoreCompileInputs.cache
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.exe
+\\Mac\Home\Desktop\homework\homework5\Calc\obj\Debug\Calc.pdb
